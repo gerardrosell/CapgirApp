@@ -20,9 +20,6 @@ import java.text.SimpleDateFormat;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Shows off the most basic usage
- */
 public class BasicActivity extends AppCompatActivity implements OnDateSelectedListener {
 
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
