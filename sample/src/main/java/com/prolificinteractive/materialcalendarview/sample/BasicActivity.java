@@ -32,7 +32,6 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     @Bind(R.id.textView)
     TextView textView;
-    //TODO: requestcode no sé què és i es fa servir per cridar l'intent cap a Event_activity (goEvent)
     private int requestCode=1;
 
     @Override
