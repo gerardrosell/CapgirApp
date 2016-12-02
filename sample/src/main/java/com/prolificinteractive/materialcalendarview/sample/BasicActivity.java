@@ -44,16 +44,12 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
         //Setup initial text
         textView.setText(getSelectedDatesString());
-
-
-
     }
 
     public void goEvent(View view) {
         Intent intent = new Intent(this, Event_activity.class);
         startActivity(intent);
     }
-
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @Nullable CalendarDay date, boolean selected) {
