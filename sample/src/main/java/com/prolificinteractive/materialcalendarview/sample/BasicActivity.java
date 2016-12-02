@@ -29,7 +29,6 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     @Bind(R.id.textView)
     TextView textView;
-    private int requestCode=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
