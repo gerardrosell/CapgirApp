@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.sample.decorators.HighlightWeekendsDecorator;
+import com.prolificinteractive.materialcalendarview.sample.decorators.MySelectorDecorator;
+import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDecorator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +25,7 @@ import butterknife.ButterKnife;
 
 public class BasicActivity extends AppCompatActivity implements OnDateSelectedListener {
 
+    private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
 
     @Bind(R.id.calendarView)
@@ -37,6 +41,12 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         ButterKnife.bind(this);
 
         widget.setOnDateChangedListener(this);
+
+        widget.addDecorators(
+                new MySelectorDecorator(this),
+                new HighlightWeekendsDecorator(),
+                oneDayDecorator
+        );
 
         //Setup initial text
         textView.setText(getSelectedDatesString());
