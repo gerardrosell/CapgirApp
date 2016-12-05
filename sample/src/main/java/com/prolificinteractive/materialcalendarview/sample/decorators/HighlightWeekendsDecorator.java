@@ -1,8 +1,11 @@
 package com.prolificinteractive.materialcalendarview.sample.decorators;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
@@ -17,7 +20,7 @@ public class HighlightWeekendsDecorator implements DayViewDecorator {
 
     private final Calendar calendar = Calendar.getInstance();
     private final Drawable highlightDrawable;
-    private static final int color = Color.parseColor("#228BC34A");
+    private static final int color = Color.parseColor("#DDDDDD");
 
     public HighlightWeekendsDecorator() {
         highlightDrawable = new ColorDrawable(color);
@@ -32,6 +35,7 @@ public class HighlightWeekendsDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.setBackgroundDrawable(highlightDrawable);
+        view.addSpan(new StyleSpan(Typeface.BOLD));
+        view.addSpan(new RelativeSizeSpan(1.2f));
     }
 }
