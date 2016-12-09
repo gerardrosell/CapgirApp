@@ -1,15 +1,16 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -25,6 +26,8 @@ import butterknife.ButterKnife;
 
 public class BasicActivity extends AppCompatActivity implements OnDateSelectedListener {
 
+    private DatabaseReference mRootRef;
+
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
 
@@ -38,6 +41,9 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic);
+        Firebase.setAndroidContext(this);
+        mRootRef= FirebaseDatabase.getInstance().getReference().child("condition");
+
         ButterKnife.bind(this);
 
         widget.setOnDateChangedListener(this);
@@ -59,7 +65,11 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @Nullable CalendarDay date, boolean selected) {
-        textView.setText(getSelectedDatesString());
+        String text = getSelectedDatesString();
+        textView.setText(text);
+        if(!text.isEmpty()){
+            mRootRef.child(text).setValue(text);
+        }
     }
 
     private String getSelectedDatesString() {
