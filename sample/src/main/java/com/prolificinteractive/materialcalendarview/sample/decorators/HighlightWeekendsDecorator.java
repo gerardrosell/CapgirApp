@@ -19,12 +19,10 @@ import java.util.Calendar;
 public class HighlightWeekendsDecorator implements DayViewDecorator {
 
     private final Calendar calendar = Calendar.getInstance();
-    private final Drawable highlightDrawable;
-    private static final int color = Color.parseColor("#DDDDDD");
+    //private final Drawable highlightDrawable;
+    //private static final int color = Color.parseColor("#DDDDDD");
 
-    public HighlightWeekendsDecorator() {
-        highlightDrawable = new ColorDrawable(color);
-    }
+    //public HighlightWeekendsDecorator() {highlightDrawable = new ColorDrawable(color);}
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
