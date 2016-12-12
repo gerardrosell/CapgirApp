@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -27,6 +30,7 @@ import butterknife.ButterKnife;
 public class BasicActivity extends AppCompatActivity implements OnDateSelectedListener {
 
     private DatabaseReference mRootRef;
+    private DatabaseReference mRootRead;
 
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
@@ -65,17 +69,40 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @Nullable CalendarDay date, boolean selected) {
+        /*
+        //Escriu a firebase el dia seleccionat en el format data 00/00/0000
         String text = getSelectedDatesString();
         textView.setText(text);
         if(!text.isEmpty()){
             mRootRef.child(text).setValue(text);
+        }*/
+        String d="";
+        if(date!=null) {
+            d = date.toString();
         }
+        d = d.substring(12,d.length()-1);
+        String[] data = d.split("-");
+        mRootRead=mRootRef.child(data[0]).child(data[1]).child(data[2]).child("1");
+        //textView.setText(d);
+        mRootRead.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String event = dataSnapshot.getValue(String.class);
+                textView.setText(event);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private String getSelectedDatesString() {
         CalendarDay date = widget.getSelectedDate();
         if (date == null) {
-            return "No Selection";
+            return "Dia lliure";
         }
         return FORMATTER.format(date.getDate());
     }
