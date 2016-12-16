@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
@@ -23,6 +24,7 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +33,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     private DatabaseReference mRootRef;
     private DatabaseReference mRootRead;
-
+    private Button button;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
 
@@ -46,10 +48,11 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic);
         Firebase.setAndroidContext(this);
+
+        button = (Button)findViewById(R.id.button);
+
         mRootRef= FirebaseDatabase.getInstance().getReference().child("condition");
-
         ButterKnife.bind(this);
-
         widget.setOnDateChangedListener(this);
 
         widget.addDecorators(
@@ -89,6 +92,19 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String event = dataSnapshot.getValue(String.class);
                 textView.setText(event);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mRootRef.child(data[0]).child(data[1]).child(data[2]).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long cont = dataSnapshot.getChildrenCount();
+                String a = "+"+String.format(Locale.getDefault(), "%d", cont);
+                button.setText(a);
             }
 
             @Override
