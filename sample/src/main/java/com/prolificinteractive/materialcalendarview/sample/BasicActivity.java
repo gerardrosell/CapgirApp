@@ -85,8 +85,8 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         }
         d = d.substring(12,d.length()-1);
         String[] data = d.split("-");
+        //pinta el nom del primer event a la barra inferior
         mRootRead=mRootRef.child(data[0]).child(data[1]).child(data[2]).child("1");
-        //textView.setText(d);
         mRootRead.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -99,6 +99,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
             }
         });
+        //pinta +Nº del número d'events que hi ha aquella data
         mRootRef.child(data[0]).child(data[1]).child(data[2]).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
