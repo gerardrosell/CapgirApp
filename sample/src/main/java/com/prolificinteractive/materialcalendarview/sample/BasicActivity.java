@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +42,32 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private String[] data;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.goEditEvent_btn:
+                goEditEvent();
+                return true;
+            /*case R.id.help:
+                showHelp();
+                return true;*/
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void goEditEvent() {
+        Intent intent = new Intent(this, Edit_event_activity.class);
+        startActivity(intent);
+    }
+
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
 
@@ -72,6 +101,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         Intent intent = new Intent(this, Event_activity.class);
         startActivity(intent);
     }
+
     public void goListEvent(View view) {
 
         if (!DaySelected){
