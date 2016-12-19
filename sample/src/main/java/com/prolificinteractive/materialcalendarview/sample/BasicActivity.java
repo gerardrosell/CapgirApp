@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +44,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     @Bind(R.id.textView)
     TextView textView;
+    private boolean DaySelected=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +73,22 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         startActivity(intent);
     }
     public void goListEvent(View view) {
-        Intent intent = new Intent(this, Event_List_activity.class);
-        if (data[0].isEmpty()||data[1].isEmpty()||data[2].isEmpty()){
-            data[0] = "1999";
-            data[1] = "1";
-            data[2] = "1";
-            // despues se ha de arreglar para que la fecha sea la del día actual.
+
+        if (!DaySelected){
+            Toast toast = Toast.makeText(this, "No hi ha cap dia seleccionat", Toast.LENGTH_LONG);
+            toast.show();
         }
-        String año = data[0];
-        intent.putExtra("año",año);
-        String mes = data[1];
-        intent.putExtra("mes",mes);
-        String dia = data[2];
-        intent.putExtra("dia",dia);
-        startActivity(intent);
-        //if fecha esta vacía, que ponga el current date
+        else {
+            Intent intent = new Intent(this, Event_List_activity.class);
+            String año = data[0];
+            intent.putExtra("año", año);
+            String mes = data[1];
+            intent.putExtra("mes", mes);
+            String dia = data[2];
+            intent.putExtra("dia", dia);
+            startActivity(intent);
+            //if fecha esta vacía, que ponga el current date
+        }
     }
 
     @Override
@@ -97,6 +100,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         if(!text.isEmpty()){
             mRootRef.child(text).setValue(text);
         }*/
+        DaySelected=true;
         String d="";
         if(date!=null) {
             d = date.toString();
