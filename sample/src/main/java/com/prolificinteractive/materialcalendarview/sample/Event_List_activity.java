@@ -26,7 +26,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         setContentView(R.layout.activity_event_list_activity);
         Firebase.setAndroidContext(this);
         recogerExtras();
-        mRootRef = FirebaseDatabase.getInstance().getReference().child("condition").child(año).child(mes).child(dia);
+        mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

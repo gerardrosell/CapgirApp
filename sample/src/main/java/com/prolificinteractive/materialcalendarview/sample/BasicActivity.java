@@ -52,7 +52,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
         button = (Button)findViewById(R.id.button);
 
-        mRootRef= FirebaseDatabase.getInstance().getReference().child("condition");
+        mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
         ButterKnife.bind(this);
         widget.setOnDateChangedListener(this);
 
