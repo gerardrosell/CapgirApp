@@ -36,6 +36,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
     private Button button;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
+    private String[] data;
 
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
@@ -69,6 +70,23 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
         Intent intent = new Intent(this, Event_activity.class);
         startActivity(intent);
     }
+    public void goListEvent(View view) {
+        Intent intent = new Intent(this, Event_List_activity.class);
+        if (data[0].isEmpty()||data[1].isEmpty()||data[2].isEmpty()){
+            data[0] = "1999";
+            data[1] = "1";
+            data[2] = "1";
+            // despues se ha de arreglar para que la fecha sea la del día actual.
+        }
+        String año = data[0];
+        intent.putExtra("año",año);
+        String mes = data[1];
+        intent.putExtra("mes",mes);
+        String dia = data[2];
+        intent.putExtra("dia",dia);
+        startActivity(intent);
+        //if fecha esta vacía, que ponga el current date
+    }
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @Nullable CalendarDay date, boolean selected) {
@@ -84,7 +102,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
             d = date.toString();
         }
         d = d.substring(12,d.length()-1);
-        String[] data = d.split("-");
+        data = d.split("-");
         //pinta el nom del primer event a la barra inferior
         mRootRead=mRootRef.child(data[0]).child(data[1]).child(data[2]).child("1");
         mRootRead.addValueEventListener(new ValueEventListener() {
@@ -119,7 +137,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
     private String getSelectedDatesString() {
         CalendarDay date = widget.getSelectedDate();
         if (date == null) {
-            return "Dia lliure";
+            return "";
         }
         return FORMATTER.format(date.getDate());
     }

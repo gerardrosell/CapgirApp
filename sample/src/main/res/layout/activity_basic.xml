@@ -41,7 +41,7 @@
             android:layout_width="90sp"
             android:layout_height="90sp"
             android:id="@+id/button"
-            android:onClick="goEvent"
+            android:onClick="goListEvent"
             />
     </LinearLayout>
 
