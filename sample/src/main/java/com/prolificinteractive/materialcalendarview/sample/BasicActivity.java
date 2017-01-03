@@ -99,6 +99,12 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
     public void goEvent(View view) {
         Intent intent = new Intent(this, Event_activity.class);
+        String año = data[0];
+        intent.putExtra("año", año);
+        String mes = data[1];
+        intent.putExtra("mes", mes);
+        String dia = data[2];
+        intent.putExtra("dia", dia);
         startActivity(intent);
     }
 
@@ -106,6 +112,7 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
 
         if (!DaySelected){
             Toast toast = Toast.makeText(this, "No hi ha cap dia seleccionat", Toast.LENGTH_LONG);
+
             toast.show();
         }
         else {
