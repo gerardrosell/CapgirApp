@@ -58,6 +58,14 @@ public class BasicActivity extends AppCompatActivity implements OnDateSelectedLi
             /*case R.id.help:
                 showHelp();
                 return true;*/
+            case R.id.Qui_som:
+                Intent intent = new Intent(this, QuiSomActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.Contacte:
+                Intent intent2 = new Intent(this, ContacteActivity.class);
+                startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

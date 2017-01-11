@@ -9,4 +9,8 @@
         android:orderInCategory="100"
         app:showAsAction="never"
         />
+    <item android:title="Qui som?"
+        android:id="@+id/Qui_som" />
+    <item android:title="Contacte"
+        android:id="@+id/Contacte" />
 </menu>

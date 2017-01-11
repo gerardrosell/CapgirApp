@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,6 +53,31 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("dia", dia);
         intent.putExtra("nombre", nombreEvento[posicion_lista]);
         startActivity(intent);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_lista, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Inici:
+                Intent intent = new Intent(this, BasicActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.Qui_som:
+                Intent intent2 = new Intent(this, QuiSomActivity.class);
+                startActivity(intent2);
+                return true;
+            case R.id.Contacte:
+                Intent intent3 = new Intent(this, ContacteActivity.class);
+                startActivity(intent3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     @Override
     protected void onStart(){
