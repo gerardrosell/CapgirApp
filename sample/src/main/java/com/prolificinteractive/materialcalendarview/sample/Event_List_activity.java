@@ -24,7 +24,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String dia;
     public String mes;
     public String nombreEvento[];
-    public int i;
+    //public int i;
     public int posicion_lista;
 
     @Override
@@ -38,7 +38,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         nombreEvento = new String[10000];
-        i = 0;
+        //i = 0;
         posicion_lista = 0;
     }
     public void goEvent(View view) {
@@ -84,8 +84,8 @@ public class Event_List_activity  extends AppCompatActivity  {
                         MessageViewHolder.class,mRootRef) {
                     @Override
                     protected void populateViewHolder(MessageViewHolder viewHolder, String model, int position) {
-                        nombreEvento[i] = model;// guardamos los strings de todas las posiciones para despues pasar la que se ha clicado
-                        i++;// posición de cada elemento
+                        //nombreEvento[i] = model;// guardamos los strings de todas las posiciones para despues pasar la que se ha clicado
+                        //i++;// posición de cada elemento
                         posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
                         viewHolder.nombre.setText(model);
                         viewHolder.participantes.setText("3");
@@ -111,7 +111,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                     }
                 };*/
         mRecyclerView.setAdapter(adapter);
-        i = 0;
+        //i = 0;
     }
 
     public static class MessageViewHolder extends  RecyclerView.ViewHolder {
@@ -120,7 +120,6 @@ public class Event_List_activity  extends AppCompatActivity  {
         public MessageViewHolder(View v) {
             super(v);
             //v.setOnClickListener((View.OnClickListener) this);
-
             nombre = (TextView) v.findViewById(R.id.nomActivitat);
             participantes = (TextView) v.findViewById(R.id.participantsActivitat);
         }
