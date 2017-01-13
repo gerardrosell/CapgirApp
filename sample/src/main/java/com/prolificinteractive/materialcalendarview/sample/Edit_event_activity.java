@@ -61,7 +61,8 @@ public class Edit_event_activity extends AppCompatActivity {
                     }
                 });
 
-                mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour));
+                //mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour));
+                mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(new Event(name,hour,"descripció de l'event"));
                 //Map<Integer, Event> map = new HashMap<Integer, Event>();
                 //map.put(key, new Event(nom_event.toString(), hour));
                 //Firebase ref = new Firebase(url).child("12345");
