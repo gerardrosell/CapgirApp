@@ -11,13 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Event_List_activity  extends AppCompatActivity  {
 
@@ -28,7 +26,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String dia;
     public String mes;
     public String nombreEvento[];
-    //public int i;
+    public int i;
     public int posicion_lista;
 
     @Override
@@ -83,15 +81,15 @@ public class Event_List_activity  extends AppCompatActivity  {
     @Override
     protected void onStart(){
         super.onStart();
-        final FirebaseRecyclerAdapter<String, MessageViewHolder> adapter =
-                new FirebaseRecyclerAdapter<String, MessageViewHolder>(String.class,
+        i=1;
+        final FirebaseRecyclerAdapter<Object, MessageViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Object, MessageViewHolder>(Object.class,
                         R.layout.activity_event_list_item_activity,
                         MessageViewHolder.class,mRootRef) {
                     @Override
-                    protected void populateViewHolder(MessageViewHolder viewHolder, String model, int position) {
-                        //nombreEvento[i] = model;// guardamos los strings de todas las posiciones para despues pasar la que se ha clicado
-                        //i++;// posición de cada elemento
-                        mRootRef.child(model).child("Name").addValueEventListener(new ValueEventListener() {
+                    protected void populateViewHolder(MessageViewHolder viewHolder, Object model, int position) {
+                        //String name = model.getClass().getName();
+                        /*mRootRef.child(String.valueOf(i)).child("Name").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 event = dataSnapshot.getValue(String.class);
@@ -101,12 +99,18 @@ public class Event_List_activity  extends AppCompatActivity  {
                             public void onCancelled(DatabaseError databaseError) {
 
                             }
-                        });
-                        posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
-                        viewHolder.nombre.setText(event);
+                        });*/
+                        //posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
+
+                        //TODO: estic aquí
+                        event = (String) model;
+                        viewHolder.nombre.setText(event);//event);
                         viewHolder.participantes.setText("3");
                         viewHolder.activity = Event_List_activity.this;
+                        i++;
                     }
+
+
                 };
         /*PRUEBA DE ADAPTADOR QUE LEA HASHMAP (AUN NO VA)*/
         /*final FirebaseRecyclerAdapter<HashMap<String,String>, MessageViewHolder> adapter =
