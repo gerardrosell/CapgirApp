@@ -35,5 +35,16 @@
     <string name="label_thin">Tile width and height specified (thin)</string>
     <string name="label_wide">Tile width and height specified (wide)</string>
     <string name="num_events">+0</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="calendari">Calendari</string>
+    <string name="contactos">Contactos</string>
+    <string name="quienes_somos">Quienes Somos</string>
+    <string name="capgirats_de_castellar">Capgirats de Castellar</string>
+    <string name="dades_del_contacte">Dades del Contacte</string>
+    <string name="descripci_de_la_colla">Descripció de la colla</string>
+    <string name="imatgegoogle">ImatgeGoogle</string>
+    <string name="logocolla">LogoColla</string>
+
 
 </resources>

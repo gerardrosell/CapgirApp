@@ -10,7 +10,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".BasicActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +21,15 @@
         <activity android:name=".Event_activity" />
         <activity android:name=".Event_List_activity" />
         <activity android:name=".Edit_event_activity" />
-        <activity android:name=".QuiSomActivity" />
-        <activity android:name=".ContacteActivity" />
+        <activity
+            android:name=".ContacteActivity"
+            android:label="Contactes"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".QuiSomActivity"
+            android:label="QuiSom"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
 
     </application>
 
