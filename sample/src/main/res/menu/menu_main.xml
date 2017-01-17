@@ -5,12 +5,8 @@
     >
     <item
         android:id="@+id/goEditEvent_btn"
-        android:title="Crea Event"
+        android:title="@string/crea_event"
         android:orderInCategory="100"
         app:showAsAction="never"
         />
-    <item android:title="Qui som?"
-        android:id="@+id/Qui_som" />
-    <item android:title="Contacte"
-        android:id="@+id/Contacte" />
 </menu>

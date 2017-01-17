@@ -45,6 +45,7 @@
     <string name="descripci_de_la_colla">Descripció de la colla</string>
     <string name="imatgegoogle">ImatgeGoogle</string>
     <string name="logocolla">LogoColla</string>
+    <string name="crea_event">Crea Event</string>
 
 
 </resources>
