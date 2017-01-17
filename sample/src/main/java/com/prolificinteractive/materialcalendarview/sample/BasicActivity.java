@@ -206,7 +206,7 @@ public class BasicActivity extends AppCompatActivity
         d = d.substring(12,d.length()-1);
         data = d.split("-");
         //pinta el nom del primer event a la barra inferior
-        mRootRead=mRootRef.child(data[0]).child(data[1]).child(data[2]).child("1");
+        mRootRead=mRootRef.child(data[0]).child(data[1]).child(data[2]).child("1").child("Name");
         mRootRead.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

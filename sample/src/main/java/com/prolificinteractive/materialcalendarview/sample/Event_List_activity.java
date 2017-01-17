@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +24,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String dia;
     public String mes;
     public String nombreEvento[];
-    public int i;
+    //public int i;
     public int posicion_lista;
 
     @Override
@@ -38,16 +38,17 @@ public class Event_List_activity  extends AppCompatActivity  {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         nombreEvento = new String[10000];
-        i = 0;
+        //i = 0;
         posicion_lista = 0;
     }
-    public void goEvent(View view) {
+
+    public void goEvent(int pos) {
         Intent intent = new Intent(this, Event_activity.class);
         /*Envio de parámetros a otra actividad*/
         intent.putExtra("año", año);
         intent.putExtra("mes", mes);
         intent.putExtra("dia", dia);
-        intent.putExtra("nombre", nombreEvento[posicion_lista]);
+        intent.putExtra("nombre", nombreEvento[pos]);
         startActivity(intent);
     }
     @Override
@@ -84,11 +85,12 @@ public class Event_List_activity  extends AppCompatActivity  {
                         MessageViewHolder.class,mRootRef) {
                     @Override
                     protected void populateViewHolder(MessageViewHolder viewHolder, String model, int position) {
-                        nombreEvento[i] = model;// guardamos los strings de todas las posiciones para despues pasar la que se ha clicado
-                        i++;// posición de cada elemento
+                        //nombreEvento[i] = model;// guardamos los strings de todas las posiciones para despues pasar la que se ha clicado
+                        //i++;// posición de cada elemento
                         posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
                         viewHolder.nombre.setText(model);
                         viewHolder.participantes.setText("3");
+                        viewHolder.activity = Event_List_activity.this;
                     }
                 };
         /*PRUEBA DE ADAPTADOR QUE LEA HASHMAP (AUN NO VA)*/
@@ -111,18 +113,26 @@ public class Event_List_activity  extends AppCompatActivity  {
                     }
                 };*/
         mRecyclerView.setAdapter(adapter);
-        i = 0;
+        //i = 0;
     }
 
-    public static class MessageViewHolder extends  RecyclerView.ViewHolder {
+    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView participantes;
         private TextView nombre;
+        public Event_List_activity activity;
+
         public MessageViewHolder(View v) {
             super(v);
             //v.setOnClickListener((View.OnClickListener) this);
-
             nombre = (TextView) v.findViewById(R.id.nomActivitat);
             participantes = (TextView) v.findViewById(R.id.participantsActivitat);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Log.i("pauek", String.format("Clicked %d", getAdapterPosition()));
+            activity.goEvent(getAdapterPosition());
         }
     }
 

@@ -5,10 +5,14 @@ package com.prolificinteractive.materialcalendarview.sample;
  */
 
 public class Event {
-    private String Name;
-    private int hour;
+    public String Name;
+    public int hour;
+    public String Description;
 
-    public Event(String Name, int hour){
+    public Event(String N, int h, String Des) {
+        Name=N;
+        hour=h;
+        Description=Des;
     }
 
 }
