@@ -13,13 +13,17 @@ import android.view.View;
 import android.widget.TextView;
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Event_List_activity  extends AppCompatActivity  {
 
     private DatabaseReference mRootRef;
     private RecyclerView mRecyclerView;
+    public String event;
     public String año;
     public String dia;
     public String mes;
@@ -87,8 +91,19 @@ public class Event_List_activity  extends AppCompatActivity  {
                     protected void populateViewHolder(MessageViewHolder viewHolder, String model, int position) {
                         //nombreEvento[i] = model;// guardamos los strings de todas las posiciones para despues pasar la que se ha clicado
                         //i++;// posición de cada elemento
+                        mRootRef.child(model).child("Name").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                event = dataSnapshot.getValue(String.class);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                         posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
-                        viewHolder.nombre.setText(model);
+                        viewHolder.nombre.setText(event);
                         viewHolder.participantes.setText("3");
                         viewHolder.activity = Event_List_activity.this;
                     }
