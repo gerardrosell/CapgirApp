@@ -1,9 +1,27 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.provider.Settings.Secure;
+
+import android.content.Intent;
+import android.icu.util.Calendar;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,10 +30,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
@@ -37,30 +51,31 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
 public class BasicActivity extends AppCompatActivity
         implements OnDateSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     public static int REQUEST_NAME_CALENDARI = 1;
-    private DatabaseReference mRootRef;
-    private DatabaseReference mRootRead;
+    private DatabaseReference mRootRef, mRootRefUsu;
+    private DatabaseReference mRootRead, mRootReadUsu;
     private Button button;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private String[] data;
+    private Usuario Usuari;
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.goEditEvent_btn) {
-            goEditEvent();
+        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -92,7 +107,7 @@ public class BasicActivity extends AppCompatActivity
     }
 
 
-    public void goEditEvent() {
+    private void goEditEvent() {
         Intent intent = new Intent(this, Edit_event_activity.class);
         startActivity(intent);
     }
@@ -106,6 +121,10 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+        String id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
+        Registre(id);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic);
         Firebase.setAndroidContext(this);
@@ -113,8 +132,9 @@ public class BasicActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         button = (Button)findViewById(R.id.button);
+        Usuari = new Usuario();
 
-        mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
+
         ButterKnife.bind(this);
         widget.setOnDateChangedListener(this);
 
@@ -232,4 +252,26 @@ public class BasicActivity extends AppCompatActivity
         }
         return FORMATTER.format(date.getDate());
     }
+
+    private void Registre(final String id){
+        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+        mRootRefUsu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.hasChild(id)){
+                    mRootRefUsu.child(id);
+                    mRootRefUsu.child(id).child("1").setValue("Nom: Alex");
+                    mRootRefUsu.child(id).child("2").setValue("Telefon: 669528410");
+                    /*Intent intent = new Intent(this, RegistreActivity.class);
+                    startActivityForResult(intent,RegistreActivity.REQUEST_NAME_REGISTRE);*/
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
