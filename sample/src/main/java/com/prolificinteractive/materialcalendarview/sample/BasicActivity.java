@@ -121,6 +121,7 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         String id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
         Registre(id);
