@@ -90,15 +90,15 @@ public class ContacteActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_view) {
+        if (id == R.id.nav_calendari) {
             Intent intent = new Intent(this, BasicActivity.class);
             startActivityForResult(intent, BasicActivity.REQUEST_NAME_CALENDARI);
 
-        }else if (id == R.id.nav_camera) {
+        }else if (id == R.id.nav_contactos) {
             Intent intent = new Intent(this, ContacteActivity.class);
             startActivityForResult(intent,ContacteActivity.REQUEST_NAME_CONTACTOS);
 
-        }else if (id == R.id.nav_gallery) {
+        }else if (id == R.id.nav_Qui_Som) {
             Intent intent = new Intent(this, QuiSomActivity.class);
             startActivityForResult(intent, QuiSomActivity.REQUEST_NAME_QUIENES_SOMOS);
 

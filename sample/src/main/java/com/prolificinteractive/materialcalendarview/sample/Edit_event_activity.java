@@ -62,7 +62,8 @@ public class Edit_event_activity extends AppCompatActivity {
                 });
 
                 //mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour));
-                mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(new Event(name,hour,"descripció de l'event"));
+                mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).
+                        child(key).setValue(new Event(name,hour,"descripció de l'event"));
             }
         });
 

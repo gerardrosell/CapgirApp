@@ -21,12 +21,12 @@ public class Event_List_activity  extends AppCompatActivity  {
 
     private DatabaseReference mRootRef;
     private RecyclerView mRecyclerView;
-    public String event;
+    public String event, sep, hora, nom, descrip;
     public String año;
     public String dia;
     public String mes;
     public String nombreEvento[];
-    public int i;
+    public int i, pos;
     public int posicion_lista;
 
     @Override
@@ -102,9 +102,16 @@ public class Event_List_activity  extends AppCompatActivity  {
                         });*/
                         //posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
 
-                        //TODO: estic aquí
-                        event = (String) model;
-                        viewHolder.nombre.setText(event);//event);
+                        //TODO: estic aquí // He afegit una funcio a baix que et separa el objecte amb 3 strings.
+                        //TODO: en el cas del nom, el retallo perque surti bé, però igual es una mica gitano
+                        //TODO: la manera de fer-ho. Si en sabeu alguna altra, ja direu
+
+                        event = ConvertirObjectToString(model);
+                        String[] sep = event.split(",");
+                        pos = sep[1].indexOf( "=" );
+                        nom = sep[1].substring( pos+1 );
+
+                        viewHolder.nombre.setText(nom);//event);
                         viewHolder.participantes.setText("3");
                         viewHolder.activity = Event_List_activity.this;
                         i++;
@@ -161,4 +168,18 @@ public class Event_List_activity  extends AppCompatActivity  {
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
     }
+
+
+
+
+
+    public String ConvertirObjectToString(Object model) {
+        String Str="";
+        if(model!=null){
+            Str = model.toString();
+        }
+        return Str;
+    }
+
 }
+

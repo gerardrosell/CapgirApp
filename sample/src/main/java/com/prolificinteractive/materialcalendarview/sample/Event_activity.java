@@ -2,22 +2,23 @@ package com.prolificinteractive.materialcalendarview.sample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.core.view.View;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Event_activity extends AppCompatActivity {
-    public String año;
-    public String dia;
-    public String mes;
-    public String fecha;
-    private DatabaseReference mRootRef;
-    private TextView data;
-    private TextView hora;
-    private TextView nom_event;
+    public String año, dia, mes, fecha;
+    private DatabaseReference mRootRef, mRootRefUsu;
+    private TextView data, hora, nom_event;
     public String nombreEvento;
+    public CheckBox Si_assisteix, No_assisteix, Va_en_bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,9 @@ public class Event_activity extends AppCompatActivity {
         data = (TextView)findViewById(R.id.Data);
         hora = (TextView)findViewById(R.id.hora);
         nom_event = (TextView)findViewById(R.id.nom_event);
+        Si_assisteix = (CheckBox)findViewById(R.id.Si);
+        No_assisteix = (CheckBox)findViewById(R.id.no);
+        Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
     }
     @Override
     protected void onStart() {
@@ -46,5 +50,25 @@ public class Event_activity extends AppCompatActivity {
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
+    }
+
+    public void ActualitzaSiAssiteixAlEvent(final String id){
+        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+        mRootRefUsu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(No_assisteix.isChecked()){
+                    mRootRefUsu.child(id).child("Assist").setValue(false);
+                }else{
+                    mRootRefUsu.child(id).child("Assist").setValue(true);
+                    if(Va_en_bus.isChecked()) mRootRefUsu.child(id).child("Va En Bus").setValue(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

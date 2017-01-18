@@ -88,15 +88,15 @@ public class BasicActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_view) {
+        if (id == R.id.nav_calendari) {
             Intent intent = new Intent(this, BasicActivity.class);
             startActivityForResult(intent,BasicActivity.REQUEST_NAME_CALENDARI);
 
-        }else if (id == R.id.nav_camera) {
+        }else if (id == R.id.nav_contactos) {
             Intent intent = new Intent(this, ContacteActivity.class);
             startActivityForResult(intent,ContacteActivity.REQUEST_NAME_CONTACTOS);
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_Qui_Som) {
             Intent intent = new Intent(this, QuiSomActivity.class);
             startActivityForResult(intent,QuiSomActivity.REQUEST_NAME_QUIENES_SOMOS);
         }
@@ -263,6 +263,8 @@ public class BasicActivity extends AppCompatActivity
                     mRootRefUsu.child(id);
                     mRootRefUsu.child(id).child("1").setValue("Nom: Alex");
                     mRootRefUsu.child(id).child("2").setValue("Telefon: 669528410");
+                    mRootRefUsu.child(id).child("Assist").setValue(false);
+                    mRootRefUsu.child(id).child("Va En Bus").setValue(false);
                     /*Intent intent = new Intent(this, RegistreActivity.class);
                     startActivityForResult(intent,RegistreActivity.REQUEST_NAME_REGISTRE);*/
                 }
