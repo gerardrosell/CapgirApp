@@ -39,8 +39,7 @@ public class ContacteActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://gmail.com");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "capgiratapp@gmail.com"));
                 startActivity(intent);
             }
         });
