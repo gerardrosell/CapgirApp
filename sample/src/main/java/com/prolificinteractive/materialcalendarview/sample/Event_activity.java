@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Event_activity extends AppCompatActivity {
-    public String año, dia, mes, fecha, id;
+    public String año, dia, mes, fecha, id,Hora;
     private DatabaseReference mRootRef, mRootRefUsu;
     private TextView data, hora, nom_event;
     public String nombreEvento;
@@ -57,6 +57,7 @@ public class Event_activity extends AppCompatActivity {
         fecha = dia+"/"+mes+"/"+año;
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
+        hora.setText(Hora);
         }
     public void recogerExtras() {
         año = getIntent().getExtras().getString("año");
@@ -64,6 +65,7 @@ public class Event_activity extends AppCompatActivity {
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
         pos = getIntent().getExtras().getInt("pos");
+        Hora = getIntent().getExtras().getString("hora");
     }
 
     public void ChkSi(android.view.View view){

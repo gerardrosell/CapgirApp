@@ -26,7 +26,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String dia;
     public String mes;
     public String nombreEvento[];
-    public int i, pos;
+    public int i, pos, pos2;
     public int posicion_lista;
 
     @Override
@@ -52,6 +52,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("dia", dia);
         intent.putExtra("nombre", nombreEvento[pos]);
         intent.putExtra("pos",pos);
+        intent.putExtra("hora",hora);
         startActivity(intent);
     }
     @Override
@@ -93,13 +94,19 @@ public class Event_List_activity  extends AppCompatActivity  {
                         event = ConvertirObjectToString(model);
                         String[] sep = event.split(",");
                         int posnombre = 0;
+                        int poshora = 0;
                         for(int j = 0; j< sep.length; j++){
                             if (sep[j].contains("Name")){
                                 posnombre = j;
                             }
+                            if (sep[j].contains("hour")){
+                                poshora = j;
+                            }
                         }
                         pos = sep[posnombre].indexOf( "=" );
                         nom = sep[posnombre].substring( pos+1 );
+                        pos2 = sep[poshora].indexOf("=");
+                        hora = sep[poshora].substring(pos2+1);
                         nombreEvento[i] = nom;
 
                         viewHolder.nombre.setText(nom);//event);
