@@ -51,6 +51,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("mes", mes);
         intent.putExtra("dia", dia);
         intent.putExtra("nombre", nombreEvento[pos]);
+        intent.putExtra("pos",pos);
         startActivity(intent);
     }
     @Override
@@ -88,23 +89,6 @@ public class Event_List_activity  extends AppCompatActivity  {
                         MessageViewHolder.class,mRootRef) {
                     @Override
                     protected void populateViewHolder(MessageViewHolder viewHolder, Object model, int position) {
-                        //String name = model.getClass().getName();
-                        /*mRootRef.child(String.valueOf(i)).child("Name").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                event = dataSnapshot.getValue(String.class);
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });*/
-                        //posicion_lista=2;//falta saber la posicion de la lista para pasar el nombre. El 2 es para sacar algo de prueba
-
-                        //TODO: estic aquí // He afegit una funcio a baix que et separa el objecte amb 3 strings.
-                        //TODO: en el cas del nom, el retallo perque surti bé, però igual es una mica gitano
-                        //TODO: la manera de fer-ho. Si en sabeu alguna altra, ja direu
 
                         event = ConvertirObjectToString(model);
                         String[] sep = event.split(",");

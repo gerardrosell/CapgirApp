@@ -27,6 +27,7 @@ public class Event_activity extends AppCompatActivity {
     private TextView data, hora, nom_event;
     public String nombreEvento;
     public CheckBox Si_assisteix, No_assisteix, Va_en_bus;
+    public int pos;
 
 
 
@@ -63,6 +64,7 @@ public class Event_activity extends AppCompatActivity {
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
+        pos = getIntent().getExtras().getInt("pos");
     }
 
     public void ck(android.view.View view){
@@ -72,11 +74,17 @@ public class Event_activity extends AppCompatActivity {
                 String No_ass = (No_assisteix.isChecked() ? "True" : "False");
                 String Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
                 String Bus = (Va_en_bus.isChecked() ? "True" : "False");
+                String posi = String.valueOf(pos+1);
                 if(No_ass.equals( "True" )){
                     mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "false" );
+                    mRootRef.child(posi).child("Assistents").child("Nom").removeValue();
                 }else if (Si_ass.equals( "True" )){
                     mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "true" );
-                    if (Bus.equals( "True" )) mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Va En Bus" ).setValue( "true" );
+                    mRootRef.child(posi).child("Assistents").child("Nom").setValue(id);
+                    if (Bus.equals( "True" )){
+                        mRootRef.child(posi).child("Va En Bus").child("Nom").setValue(id);
+                        mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Va En Bus" ).setValue( "true" );
+                    }
                 }
             }
 
