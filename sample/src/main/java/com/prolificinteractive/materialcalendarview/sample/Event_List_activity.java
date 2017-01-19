@@ -40,7 +40,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         nombreEvento = new String[10000];
-        //i = 0;
+        i = 0;
         posicion_lista = 0;
     }
 
@@ -50,7 +50,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("año", año);
         intent.putExtra("mes", mes);
         intent.putExtra("dia", dia);
-        intent.putExtra("nombre", nom);
+        intent.putExtra("nombre", nombreEvento[pos]);
         startActivity(intent);
     }
     @Override
@@ -110,6 +110,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                         String[] sep = event.split(",");
                         pos = sep[1].indexOf( "=" );
                         nom = sep[1].substring( pos+1 );
+                        nombreEvento[i] = nom;
 
                         viewHolder.nombre.setText(nom);//event);
                         viewHolder.participantes.setText("3");
@@ -119,27 +120,8 @@ public class Event_List_activity  extends AppCompatActivity  {
 
 
                 };
-        /*PRUEBA DE ADAPTADOR QUE LEA HASHMAP (AUN NO VA)*/
-        /*final FirebaseRecyclerAdapter<HashMap<String,String>, MessageViewHolder> adapter =
-                new FirebaseRecyclerAdapter<HashMap<String, String>, MessageViewHolder>(HashMap.class,
-                        // android.R.layout.two_line_list_item,
-                        R.layout.activity_event_list_item_activity,
-                        MessageViewHolder.class,mRootRef) {
-
-                    @Override
-                    protected void populateViewHolder(MessageViewHolder viewHolder, HashMap<String, String> model, int position) {
-                        Iterator iterator = model.keySet().iterator();
-                        int i = 0;
-                        while (iterator.hasNext()){
-                            String nombreEvento = (String) iterator.next();
-                            String keyMap[] = new String[0];
-                            keyMap[i] = nombreEvento;
-                        }
-                        viewHolder.nombre.setText(model.keySet());
-                    }
-                };*/
         mRecyclerView.setAdapter(adapter);
-        //i = 0;
+        i = 0;
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -149,7 +131,6 @@ public class Event_List_activity  extends AppCompatActivity  {
 
         public MessageViewHolder(View v) {
             super(v);
-            //v.setOnClickListener((View.OnClickListener) this);
             nombre = (TextView) v.findViewById(R.id.nomActivitat);
             participantes = (TextView) v.findViewById(R.id.participantsActivitat);
             v.setOnClickListener(this);
@@ -157,7 +138,7 @@ public class Event_List_activity  extends AppCompatActivity  {
 
         @Override
         public void onClick(View view) {
-            Log.i("pauek", String.format("Clicked %d", getAdapterPosition()));
+            Log.i("user", String.format("Clicked %d", getAdapterPosition()));
             activity.goEvent(getAdapterPosition());
         }
     }
@@ -168,10 +149,6 @@ public class Event_List_activity  extends AppCompatActivity  {
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
     }
-
-
-
-
 
     public String ConvertirObjectToString(Object model) {
         String Str="";

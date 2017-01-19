@@ -45,8 +45,6 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix = (CheckBox)findViewById(R.id.Si);
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
-
-
     }
     @Override
     protected void onStart() {
