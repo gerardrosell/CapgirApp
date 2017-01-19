@@ -57,14 +57,25 @@ public class Event_activity extends AppCompatActivity {
         fecha = dia+"/"+mes+"/"+año;
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
-
-    }
+        }
     public void recogerExtras() {
         año = getIntent().getExtras().getString("año");
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
         pos = getIntent().getExtras().getInt("pos");
+    }
+
+    public void ChkSi(android.view.View view){
+        No_assisteix.setChecked(false);
+        Si_assisteix.setChecked(true);
+        Va_en_bus.setEnabled(true);
+    }
+    public void ChkNo(android.view.View view){
+        No_assisteix.setChecked(true);
+        Si_assisteix.setChecked(false);
+        Va_en_bus.setEnabled(false);
+        Va_en_bus.setChecked(false);
     }
 
     public void ck(android.view.View view){
@@ -77,13 +88,17 @@ public class Event_activity extends AppCompatActivity {
                 String posi = String.valueOf(pos+1);
                 if(No_ass.equals( "True" )){
                     mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "false" );
-                    mRootRef.child(posi).child("Assistents").child("Nom").removeValue();
+                    mRootRef.child(posi).child("Assistents").child(id).removeValue();
+                    mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
                 }else if (Si_ass.equals( "True" )){
                     mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "true" );
-                    mRootRef.child(posi).child("Assistents").child("Nom").setValue(id);
+                    mRootRef.child(posi).child("Assistents").child(id).setValue(id);
                     if (Bus.equals( "True" )){
-                        mRootRef.child(posi).child("Va En Bus").child("Nom").setValue(id);
+                        mRootRef.child(posi).child("Va En Bus").child(id).setValue(id);
                         mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Va En Bus" ).setValue( "true" );
+                    }
+                    else{
+                        mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
                     }
                 }
             }

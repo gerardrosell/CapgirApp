@@ -131,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/Si"
                 android:textSize="30dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="ChkSi" />
 
             <CheckBox
                 android:text="No"
@@ -140,7 +141,7 @@
                 android:id="@+id/no"
                 android:textSize="30dp"
                 android:layout_weight="1"
-                />
+                android:onClick="ChkNo" />
         </TableRow>
 
         <TableRow
