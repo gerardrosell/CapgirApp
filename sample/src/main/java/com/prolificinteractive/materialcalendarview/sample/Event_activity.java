@@ -68,15 +68,24 @@ public class Event_activity extends AppCompatActivity {
     }
 
     public void ck(android.view.View view){
-        String No_ass = (No_assisteix.isChecked() ? "True" : "False");
-        String Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
-        String Bus = (Va_en_bus.isChecked() ? "True" : "False");
-        Toast.makeText(this, No_ass, Toast.LENGTH_LONG).show();
-        if(No_ass.equals( "True" )){
-            mRootRefUsu.child( id ).child( "Assist" ).setValue( "false" );
-        }else if (Si_ass.equals( "True" )){
-            mRootRefUsu.child( id ).child( "Assist" ).setValue( "true" );
-            if (Bus.equals( "True" )) mRootRefUsu.child( id ).child( "Va En Bus" ).setValue( "true" );
-        }
+        mRootRefUsu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String No_ass = (No_assisteix.isChecked() ? "True" : "False");
+                String Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
+                String Bus = (Va_en_bus.isChecked() ? "True" : "False");
+                if(No_ass.equals( "True" )){
+                    mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "false" );
+                }else if (Si_ass.equals( "True" )){
+                    mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "true" );
+                    if (Bus.equals( "True" )) mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Va En Bus" ).setValue( "true" );
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

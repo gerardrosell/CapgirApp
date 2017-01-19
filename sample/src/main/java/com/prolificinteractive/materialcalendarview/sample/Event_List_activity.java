@@ -50,7 +50,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("año", año);
         intent.putExtra("mes", mes);
         intent.putExtra("dia", dia);
-        intent.putExtra("nombre", nombreEvento[pos]);
+        intent.putExtra("nombre", nom);
         startActivity(intent);
     }
     @Override
