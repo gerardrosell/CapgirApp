@@ -139,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/no"
                 android:textSize="30dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                />
         </TableRow>
 
         <TableRow
@@ -191,12 +192,13 @@
     </TableLayout>
 
     <Button
-        android:text="Guardar"
+        android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="166dp"
-        android:id="@+id/Guardar"
-        android:onClick="ActualitzaSiAssiteixAlEvent" />
+        android:layout_marginBottom="130dp"
+        android:id="@+id/button3"
+        android:onClick="ck"/>
+
 </RelativeLayout>
