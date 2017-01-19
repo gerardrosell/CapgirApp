@@ -92,8 +92,14 @@ public class Event_List_activity  extends AppCompatActivity  {
 
                         event = ConvertirObjectToString(model);
                         String[] sep = event.split(",");
-                        pos = sep[1].indexOf( "=" );
-                        nom = sep[1].substring( pos+1 );
+                        int posnombre = 0;
+                        for(int j = 0; j< sep.length; j++){
+                            if (sep[j].contains("Name")){
+                                posnombre = j;
+                            }
+                        }
+                        pos = sep[posnombre].indexOf( "=" );
+                        nom = sep[posnombre].substring( pos+1 );
                         nombreEvento[i] = nom;
 
                         viewHolder.nombre.setText(nom);//event);
