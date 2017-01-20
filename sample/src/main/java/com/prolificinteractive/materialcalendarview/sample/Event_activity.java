@@ -39,6 +39,45 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix = (CheckBox)findViewById(R.id.Si);
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
+        mRootRef.child(String.valueOf(pos)).child("Assistents").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(id)){
+                    Si_assisteix.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mRootRef.child(String.valueOf(pos)).child("No_Assistents").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(id)){
+                    Si_assisteix.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mRootRef.child(String.valueOf(pos)).child("Va En Bus").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(id)){
+                    Va_en_bus.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     @Override
     protected void onStart() {
@@ -109,8 +148,8 @@ public class Event_activity extends AppCompatActivity {
         startActivityForResult(intent,BasicActivity.REQUEST_NAME_CALENDARI);
     }
 
-    public void LdE(android.view.View view) {
+    /*public void LdE(android.view.View view) {
         Intent intent = new Intent( this, Event_List_activity.class );
         startActivityForResult(intent,Event_List_activity.REQUEST_NAME_LLISTA_EVENTS);
-    }
+    }*/
 }
