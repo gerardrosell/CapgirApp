@@ -28,6 +28,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String nombreEvento[];
     public int i, pos, pos2;
     public int posicion_lista;
+    public static int REQUEST_NAME_LLISTA_EVENTS = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

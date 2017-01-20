@@ -3,18 +3,11 @@ package com.prolificinteractive.materialcalendarview.sample;
 
 import android.widget.CheckBox;
 import android.widget.TextView;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Toast;
-
 import com.firebase.client.Firebase;
-import com.firebase.client.core.view.View;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -109,5 +102,15 @@ public class Event_activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void Cal(android.view.View view){
+        Intent intent = new Intent(this, BasicActivity.class);
+        startActivityForResult(intent,BasicActivity.REQUEST_NAME_CALENDARI);
+    }
+
+    public void LdE(android.view.View view) {
+        Intent intent = new Intent( this, Event_List_activity.class );
+        startActivityForResult(intent,Event_List_activity.REQUEST_NAME_LLISTA_EVENTS);
     }
 }

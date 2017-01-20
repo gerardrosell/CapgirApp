@@ -6,12 +6,48 @@
     android:layout_height="match_parent"
     tools:context="com.prolificinteractive.materialcalendarview.sample.Event_activity">
 
+    <Button
+        android:text="Apuntat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="130dp"
+        android:id="@+id/button3"
+        android:onClick="ck"/>
+
+    <Button
+        android:text="Llista d'Events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignStart="@+id/button3"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:id="@+id/LlistaEvents"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="LdE"/>
+
+    <Button
+        android:text="Calendari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/LlistaEvents"
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignEnd="@+id/button3"
+        android:layout_marginRight="51dp"
+        android:layout_marginEnd="51dp"
+        android:id="@+id/Calendari"
+        android:onClick="Cal"/>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TableRow
             android:layout_width="match_parent"
@@ -191,15 +227,5 @@
                 />
         </TableRow>
     </TableLayout>
-
-    <Button
-        android:text="Apuntat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="130dp"
-        android:id="@+id/button3"
-        android:onClick="ck"/>
 
 </RelativeLayout>
