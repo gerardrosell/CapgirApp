@@ -26,7 +26,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String dia;
     public String mes;
     public String nombreEvento[];
-    public int i, pos, pos2;
+    public int i, pos, poss, pos2;
     public int posicion_lista;
     public static int REQUEST_NAME_LLISTA_EVENTS = 4;
 
@@ -93,6 +93,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                     protected void populateViewHolder(MessageViewHolder viewHolder, Object model, int position) {
 
                         event = ConvertirObjectToString(model);
+                        event = event.substring(0,event.length()-1);
                         String[] sep = event.split(",");
                         int posnombre = 0;
                         int poshora = 0;
@@ -105,7 +106,8 @@ public class Event_List_activity  extends AppCompatActivity  {
                             }
                         }
                         pos = sep[posnombre].indexOf( "=" );
-                        nom = sep[posnombre].substring( pos+1 );
+                        //poss = sep[posnombre].indexOf( "}" );
+                        nom = sep[posnombre].substring( pos+1);
                         pos2 = sep[poshora].indexOf("=");
                         hora = sep[poshora].substring(pos2+1);
                         nombreEvento[i] = nom;

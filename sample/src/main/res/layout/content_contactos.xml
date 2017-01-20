@@ -40,4 +40,35 @@
         android:layout_marginBottom="18dp"
         android:contentDescription="@string/imatgegoogle" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/twitter_button"
+        android:id="@+id/twitterButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:layout_toRightOf="@+id/google_enlace"
+        android:layout_toEndOf="@+id/google_enlace"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/facebook_button"
+        android:id="@+id/facebookButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:layout_toEndOf="@+id/twitterButton"
+        android:layout_toRightOf="@+id/twitterButton"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/gmail"
+        android:id="@+id/gmail"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:layout_toEndOf="@+id/facebookButton"
+        android:layout_toRightOf="@+id/facebookButton"/>
+
 </RelativeLayout>

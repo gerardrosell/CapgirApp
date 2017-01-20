@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -35,8 +36,35 @@ public class ContacteActivity extends AppCompatActivity
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        ImageButton ge = (ImageButton) findViewById(R.id.google_enlace);
+        ge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("https://plus.google.com/+CastellersdeCastellar_Capgirats"));
+                startActivity(intent);
+            }
+        });
+
+        ImageButton tw = (ImageButton) findViewById(R.id.twitterButton);
+        tw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("https://twitter.com/capgiratscdv"));
+                startActivity(intent);
+            }
+        });
+
+        ImageButton fac = (ImageButton) findViewById(R.id.facebookButton);
+        fac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("https://www.facebook.com/CollaCastelleraDeCastellarDelValles"));
+                startActivity(intent);
+            }
+        });
+
+        ImageButton gmail = (ImageButton) findViewById(R.id.gmail);
+        gmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "capgiratapp@gmail.com"));
