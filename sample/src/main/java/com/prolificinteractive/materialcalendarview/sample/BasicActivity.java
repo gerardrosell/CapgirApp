@@ -120,7 +120,7 @@ public class BasicActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         button = (Button)findViewById(R.id.button);
-        Usuari = new Usuario();
+        //Usuari = new Usuario();
 
 
         ButterKnife.bind(this);
@@ -247,9 +247,7 @@ public class BasicActivity extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.hasChild(id)){
-                    mRootRefUsu.child(id);
-                    mRootRefUsu.child(id).child("1").setValue("Nom: Alex");
-                    mRootRefUsu.child(id).child("2").setValue("Telefon: 669528410");
+                    mRootRefUsu.child(id).setValue(new Usuario("Gerard", "gerard.rosell.cardus@gmail.com", "10/06/1994", "695010352"));
                     /*Intent intent = new Intent(this, RegistreActivity.class);
                     startActivityForResult(intent,RegistreActivity.REQUEST_NAME_REGISTRE);*/
                 }

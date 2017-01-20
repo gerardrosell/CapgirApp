@@ -6,25 +6,21 @@ package com.prolificinteractive.materialcalendarview.sample;
 
 
 public class Usuario {
-    private String id;
-    private String nombre;
-    private String email;
-    private boolean socio;
-    private boolean admin;
-    private String fechaNacimiento;
-    private String telefono;
+    public String nombre;
+    public String email;
+    public boolean socio;
+    public boolean admin;
+    public String fechaNacimiento;
+    public String telefono;
 
-    public Usuario(){
-
-    }
-
-    public void Registrat (String id, String nom, String email, String FNaix, String NumTel ){
-        this.id = id;
+    public Usuario(String nom, String email, String FNaix, String NumTel){
         this.nombre = nom;
         this.email = email;
         this.socio = false;
         this.admin = false;
         this.fechaNacimiento = FNaix;
         this.telefono = NumTel;
+
     }
+
 }
