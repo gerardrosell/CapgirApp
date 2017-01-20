@@ -3,6 +3,7 @@
     package="com.prolificinteractive.materialcalendarview.sample">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,13 +26,12 @@
         <activity
             android:name=".ContacteActivity"
             android:label="Contactes"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuiSomActivity"
             android:label="QuiSom"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegistreActivity"></activity>
     </application>
 
 </manifest>

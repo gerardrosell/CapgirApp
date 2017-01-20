@@ -243,15 +243,13 @@ public class BasicActivity extends AppCompatActivity
 
     private void Registre(final String id){
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+        final Intent intentReg = new Intent(this, RegistreActivity.class);
         mRootRefUsu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.hasChild(id)){
-                    mRootRefUsu.child(id);
-                    mRootRefUsu.child(id).child("1").setValue("Nom: Alex");
-                    mRootRefUsu.child(id).child("2").setValue("Telefon: 669528410");
-                    /*Intent intent = new Intent(this, RegistreActivity.class);
-                    startActivityForResult(intent,RegistreActivity.REQUEST_NAME_REGISTRE);*/
+                    intentReg.putExtra("id", id);
+                    startActivity(intentReg);
                 }
             }
 
