@@ -43,7 +43,7 @@ public class QuiSomActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    public void goEditEvent() {
+    /*public void goEditEvent() {
         Intent intent = new Intent(this, Edit_event_activity.class);
         startActivity(intent);
     }
@@ -59,15 +59,9 @@ public class QuiSomActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }*/
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();

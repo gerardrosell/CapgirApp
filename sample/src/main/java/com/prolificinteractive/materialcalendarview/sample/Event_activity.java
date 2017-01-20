@@ -89,15 +89,14 @@ public class Event_activity extends AppCompatActivity {
                 String Bus = (Va_en_bus.isChecked() ? "True" : "False");
                 String posi = String.valueOf(pos+1);
                 if(No_ass.equals( "True" )){
-                    mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "false" );
                     mRootRef.child(posi).child("Assistents").child(id).removeValue();
                     mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
+                    mRootRef.child(posi).child("No_Assistents").child(id).setValue(id);
                 }else if (Si_ass.equals( "True" )){
-                    mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Assist" ).setValue( "true" );
                     mRootRef.child(posi).child("Assistents").child(id).setValue(id);
+                    mRootRef.child(posi).child("No_Assistents").child(id).removeValue();
                     if (Bus.equals( "True" )){
                         mRootRef.child(posi).child("Va En Bus").child(id).setValue(id);
-                        mRootRefUsu.child( id ).child(año).child(mes).child(dia).child(nombreEvento).child( "Va En Bus" ).setValue( "true" );
                     }
                     else{
                         mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
