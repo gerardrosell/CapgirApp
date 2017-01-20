@@ -120,7 +120,7 @@ public class BasicActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         button = (Button)findViewById(R.id.button);
-        Usuari = new Usuario();
+        //Usuari = new Usuario();
 
 
         ButterKnife.bind(this);
