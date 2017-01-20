@@ -10,7 +10,7 @@
             android:inputType="none"
             android:ems="10"
             android:id="@+id/nomActivitat"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textAlignment="center"
             android:padding="10dp"
             android:paddingBottom="10dp" />
@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 android:ems="10"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:id="@+id/participantsActivitat"
                 android:textAlignment="center"
                 android:paddingBottom="10dp"
