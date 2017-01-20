@@ -49,7 +49,7 @@ public class BasicActivity extends AppCompatActivity
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private String[] data;
-    private Usuario Usuari;
+    //private Usuario Usuari;
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
