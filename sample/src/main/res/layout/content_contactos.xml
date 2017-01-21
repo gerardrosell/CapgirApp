@@ -25,20 +25,20 @@
         android:ems="10"
         android:id="@+id/informacio_contacte"
         android:text="@string/dades_del_contacte" />
-        </RelativeLayout>
+
+    </RelativeLayout>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/common_plus_signin_btn_icon_dark"
         android:id="@+id/google_enlace"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:contentDescription="@string/imatgegoogle"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="18dp"
-        android:contentDescription="@string/imatgegoogle" />
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -46,10 +46,8 @@
         app:srcCompat="@mipmap/twitter_button"
         android:id="@+id/twitterButton"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="18dp"
         android:layout_toRightOf="@+id/google_enlace"
-        android:layout_toEndOf="@+id/google_enlace"
-        />
+        android:layout_toEndOf="@+id/google_enlace" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -57,9 +55,8 @@
         app:srcCompat="@mipmap/facebook_button"
         android:id="@+id/facebookButton"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="18dp"
-        android:layout_toEndOf="@+id/twitterButton"
-        android:layout_toRightOf="@+id/twitterButton"/>
+        android:layout_toRightOf="@+id/twitterButton"
+        android:layout_toEndOf="@+id/twitterButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -67,8 +64,7 @@
         app:srcCompat="@mipmap/gmail"
         android:id="@+id/gmail"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="18dp"
-        android:layout_toEndOf="@+id/facebookButton"
-        android:layout_toRightOf="@+id/facebookButton"/>
+        android:layout_toRightOf="@+id/facebookButton"
+        android:layout_toEndOf="@+id/facebookButton" />
 
 </RelativeLayout>
