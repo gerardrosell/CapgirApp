@@ -126,10 +126,10 @@ public class Event_activity extends AppCompatActivity {
                 if(No_ass.equals( "True" )){
                     mRootRef.child(posi).child("Assistents").child(id).removeValue();
                     mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
-                    mRootRef.child(posi).child("No_Assistents").child(id).setValue(id);
+                    mRootRef.child(posi).child("No_Assist").child(id).setValue(id);
                 }else if (Si_ass.equals( "True" )){
                     mRootRef.child(posi).child("Assistents").child(id).setValue(id);
-                    mRootRef.child(posi).child("No_Assistents").child(id).removeValue();
+                    mRootRef.child(posi).child("No_Assist").child(id).removeValue();
                     if (Bus.equals( "True" )){
                         mRootRef.child(posi).child("Va En Bus").child(id).setValue(id);
                     }

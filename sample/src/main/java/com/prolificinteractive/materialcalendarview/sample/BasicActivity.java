@@ -211,6 +211,7 @@ public class BasicActivity extends AppCompatActivity
             intent.putExtra("mes", mes);
             String dia = data[2];
             intent.putExtra("dia", dia);
+            intent.putExtra( "cont", cont );
 
 
 

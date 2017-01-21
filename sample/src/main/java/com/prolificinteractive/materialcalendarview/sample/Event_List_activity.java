@@ -14,20 +14,26 @@ import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 public class Event_List_activity  extends AppCompatActivity  {
 
-    private DatabaseReference mRootRef;
+    private DatabaseReference mRootRef, mRootRead;
     private RecyclerView mRecyclerView;
-    public String event, hora, nom;
+    public String event, hora, nom, Assist, Desc;
     public String año;
     public String dia;
     public String mes;
-    public String nombreEvento[];
-    public int i, pos, pos2;
+    public String nombreEvento[], participants[];
+    public int i, pos, pos2, posAss, posD, q;;
     public int posicion_lista;
+    public long NAct;
     //public Object participants;
     //public long quantitatEvents;
     public long cont;
@@ -39,6 +45,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         Firebase.setAndroidContext(this);
         recogerExtras();
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
+        BuscarParticipants( NAct );
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,26 +79,33 @@ public class Event_List_activity  extends AppCompatActivity  {
 
                         event = ConvertirObjectToString(model);
                         event = event.substring(0,event.length()-1);
-                        String[] sep = event.split(",");
+                        event = event + ",";
+                        String[] sep = event.split("=");
                         int posnombre = 0;
                         int poshora = 0;
+                        int posAs = 0;
+                        int posDesc = 0;
                         for(int j = 0; j< sep.length; j++){
                             if (sep[j].contains("Name")){
-                                posnombre = j;
+                                posnombre = j+1;
                             }
                             if (sep[j].contains("hour")){
-                                poshora = j;
+                                poshora = j+1;
+                            }
+                            if (sep[j].contains("Description")){
+                                posDesc = j+1;
                             }
                         }
-                        pos = sep[posnombre].indexOf( "=" );
-                        //poss = sep[posnombre].indexOf( "}" );
-                        nom = sep[posnombre].substring( pos+1);
-                        pos2 = sep[poshora].indexOf("=");
-                        hora = sep[poshora].substring(pos2+1);
+                        pos = sep[posnombre].indexOf( "," );
+                        nom = sep[posnombre].substring(0,pos);
+                        pos2 = sep[poshora].indexOf(",");
+                        hora = sep[poshora].substring(0,pos2);
+                        posD = sep[posDesc].indexOf( "," );
+                        Desc = sep[posDesc].substring( 0,posD );
                         nombreEvento[i] = nom;
 
                         viewHolder.nombre.setText(nom);//event);
-                        viewHolder.participantes.setText("3");
+                        viewHolder.participantes.setText(participants[i]);
                         viewHolder.activity = Event_List_activity.this;
                         i++;
                     }
@@ -126,6 +140,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         año = getIntent().getExtras().getString("año");
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
+        NAct = getIntent().getExtras().getLong("cont");
     }
 
     public String ConvertirObjectToString(Object model) {
@@ -134,6 +149,24 @@ public class Event_List_activity  extends AppCompatActivity  {
             Str = model.toString();
         }
         return Str;
+    }
+
+    public void BuscarParticipants(long NumAct){
+        for(q = 1; q<=NumAct; q++){
+            mRootRead=mRootRef.child(String.valueOf(q)).child( "Assistents" );
+            mRootRead.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    cont = dataSnapshot.getChildrenCount();
+                    participants[q-1] = String.format( Locale.getDefault(), "%d", cont);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
 }
