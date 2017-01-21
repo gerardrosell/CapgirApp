@@ -18,39 +18,19 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/google_enlace">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/informacio_contacte"
-        android:text="@string/dades_del_contacte" />
+        android:text="@string/dades_del_contacte"
+        android:textAlignment="center" />
 
     </RelativeLayout>
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_plus_signin_btn_icon_dark"
-        android:id="@+id/google_enlace"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:contentDescription="@string/imatgegoogle"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/twitter_button"
-        android:id="@+id/twitterButton"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/google_enlace"
-        android:layout_toEndOf="@+id/google_enlace" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="65dp"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/facebook_button"
         android:id="@+id/facebookButton"
@@ -59,7 +39,36 @@
         android:layout_toEndOf="@+id/twitterButton" />
 
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/common_plus_signin_btn_icon_dark"
+        android:id="@+id/google_enlace"
+        android:contentDescription="@string/imatgegoogle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/twitter_button"
+        android:id="@+id/twitterButton"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/google_enlace"
+        android:layout_toEndOf="@+id/google_enlace" />
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/instagram_button"
+        android:id="@+id/instagramButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/gmail"
+        android:layout_toEndOf="@+id/gmail"  />
+
+    <ImageButton
+        android:layout_width="65dp"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/gmail"
         android:id="@+id/gmail"

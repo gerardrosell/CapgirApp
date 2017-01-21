@@ -26,6 +26,7 @@ public class ContacteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     public static int REQUEST_NAME_CONTACTOS = 2;
+    private TextView text_contacte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ContacteActivity extends AppCompatActivity
         setContentView(R.layout.activity_contacte);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        text_contacte = (TextView) findViewById(R.id.informacio_contacte);
 
 
 
@@ -68,6 +70,15 @@ public class ContacteActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "capgiratapp@gmail.com"));
+                startActivity(intent);
+            }
+        });
+
+        ImageButton insta = (ImageButton) findViewById(R.id.instagramButton);
+        insta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/explore/tags/capgirats/?hl=es"));
                 startActivity(intent);
             }
         });
