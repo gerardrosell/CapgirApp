@@ -41,7 +41,8 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix = (CheckBox)findViewById(R.id.Si);
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
-        mRootRef.child(String.valueOf(pos)).child("Assistents").addValueEventListener(new ValueEventListener() {
+        //TODO: arreglar la memoria de checks
+        mRootRef.child(String.valueOf(pos+1)).child("Assistents").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
@@ -54,7 +55,7 @@ public class Event_activity extends AppCompatActivity {
 
             }
         });
-        mRootRef.child(String.valueOf(pos)).child("No_Assistents").addValueEventListener(new ValueEventListener() {
+        mRootRef.child(String.valueOf(pos+1)).child("No_Assistents").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
@@ -67,7 +68,7 @@ public class Event_activity extends AppCompatActivity {
 
             }
         });
-        mRootRef.child(String.valueOf(pos)).child("Va En Bus").addValueEventListener(new ValueEventListener() {
+        mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){

@@ -7,16 +7,6 @@
     tools:context="com.prolificinteractive.materialcalendarview.sample.Event_activity">
 
     <Button
-        android:text="Apuntat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="130dp"
-        android:id="@+id/button3"
-        android:onClick="ck"/>
-
-    <Button
         android:text="Calendari"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +14,12 @@
         android:id="@+id/Calendari"
         android:onClick="Cal"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:background="@color/app_primary"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -39,8 +34,8 @@
             android:id="@+id/event">
 
             <TextView
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:textAlignment="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,6 +204,25 @@
                 android:layout_height="2dp"
                 android:background="@color/app_primary"
                 />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/apunta">
+
+            <Button
+                android:text="Apuntat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="130dp"
+                android:id="@+id/button3"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:onClick="ck"
+                android:background="@color/app_primary"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"/>
         </TableRow>
     </TableLayout>
 
