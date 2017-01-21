@@ -21,13 +21,16 @@ public class Event_List_activity  extends AppCompatActivity  {
 
     private DatabaseReference mRootRef;
     private RecyclerView mRecyclerView;
-    public String event, sep, hora, nom, descrip;
+    public String event, hora, nom;
     public String año;
     public String dia;
     public String mes;
     public String nombreEvento[];
-    public int i, pos, poss, pos2;
+    public int i, pos, pos2;
     public int posicion_lista;
+    //public Object participants;
+    //public long quantitatEvents;
+    public long cont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

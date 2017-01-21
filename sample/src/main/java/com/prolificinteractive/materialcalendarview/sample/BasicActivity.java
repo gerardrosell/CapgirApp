@@ -2,23 +2,21 @@ package com.prolificinteractive.materialcalendarview.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
+import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.provider.Settings.Secure;
-
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -53,6 +51,9 @@ public class BasicActivity extends AppCompatActivity
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private String[] data;
+    public long cont;
+    public Object participants;
+    //private Usuario Usuari;
     private boolean admin = false;
     private Usuario usuari;
     private int posicio, i;
@@ -80,6 +81,7 @@ public class BasicActivity extends AppCompatActivity
         Admin(id);
         //findViewById(R.id.goEditEvent_btn).setEnabled( false );
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_basic);
         Firebase.setAndroidContext(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -210,6 +212,9 @@ public class BasicActivity extends AppCompatActivity
             intent.putExtra("mes", mes);
             String dia = data[2];
             intent.putExtra("dia", dia);
+
+
+
             startActivity(intent);
             //if fecha esta vacía, que ponga el current date
         }
@@ -249,7 +254,7 @@ public class BasicActivity extends AppCompatActivity
         mRootRef.child(data[0]).child(data[1]).child(data[2]).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                long cont = dataSnapshot.getChildrenCount();
+                cont = dataSnapshot.getChildrenCount();
                 String a = "+"+String.format(Locale.getDefault(), "%d", cont);
                 button.setText(a);
             }
@@ -271,6 +276,7 @@ public class BasicActivity extends AppCompatActivity
     }
 
     private void Registre(final String id){
+        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         final Intent intentReg = new Intent(this, RegistreActivity.class);
         mRootRefUsu.addValueEventListener(new ValueEventListener() {
             @Override
