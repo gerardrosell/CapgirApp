@@ -114,7 +114,7 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
-        MenuItem register = menu.findItem( R.id.action_settings );
+        MenuItem register = menu.findItem( R.id.goEditEvent_btn );
         Admin(id);
         if(!admin){
             register.setVisible( false );
@@ -126,7 +126,7 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -135,9 +135,9 @@ public class BasicActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, QuiSomActivity.class);
-            startActivityForResult(intent,QuiSomActivity.REQUEST_NAME_QUIENES_SOMOS);
+        if (id == R.id.goEditEvent_btn) {
+            Intent intent = new Intent(this, Edit_event_activity.class);
+            startActivity(intent);
             return true;
         }
 

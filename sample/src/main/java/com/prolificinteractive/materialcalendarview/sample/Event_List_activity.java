@@ -55,31 +55,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("hora",hora);
         startActivity(intent);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_lista, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Inici:
-                Intent intent_inici = new Intent(this, BasicActivity.class);
-                startActivity(intent_inici);
-                return true;
-            case R.id.Qui_som:
-                Intent intent_quisom = new Intent(this, QuiSomActivity.class);
-                startActivity(intent_quisom);
-                return true;
-            case R.id.Contacte:
-                Intent intent_contacte = new Intent(this, ContacteActivity.class);
-                startActivity(intent_contacte);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
     @Override
     protected void onStart(){
         super.onStart();
