@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:inputType="time"
             android:ems="10"
-            android:hint="Hora"
+            android:hint="Hora hh:mm"
             android:id="@+id/selectHour"
             android:textSize="30sp"/>
 
