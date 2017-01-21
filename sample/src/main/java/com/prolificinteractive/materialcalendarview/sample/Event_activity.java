@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -141,6 +143,9 @@ public class Event_activity extends AppCompatActivity {
 
             }
         });
+        Toast toast = Toast.makeText(this, "Guardat", Toast.LENGTH_LONG);
+
+        toast.show();
     }
 
     public void Cal(android.view.View view){

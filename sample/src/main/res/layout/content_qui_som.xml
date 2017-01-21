@@ -21,4 +21,13 @@
         android:textAlignment="center"
         android:text="@string/descripci_de_la_colla"  />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/web_button"
+        android:id="@+id/web_button"
+        android:layout_marginBottom="41dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
