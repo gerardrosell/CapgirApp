@@ -24,9 +24,6 @@ public class RegistreActivity extends AppCompatActivity {
         final EditText Email = (EditText) findViewById(R.id.email);
         final EditText telefon = (EditText) findViewById(R.id.telefon);
         final DatePicker selectDayNaix = (DatePicker) findViewById(R.id.selectDayNaix);
-        final int day = selectDayNaix.getDayOfMonth();
-        final int month = selectDayNaix.getMonth();
-        final int year = selectDayNaix.getYear();
 
 
         Intent myIntent = getIntent(); // gets the previously created intent
@@ -36,6 +33,9 @@ public class RegistreActivity extends AppCompatActivity {
         registram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int day = selectDayNaix.getDayOfMonth();
+                final int month = selectDayNaix.getMonth();
+                final int year = selectDayNaix.getYear();
                 mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
                 mRootRefUsu.child(id).setValue(new Usuario(Nom.getText().toString(),
                         Email.getText().toString(), String.valueOf( day )

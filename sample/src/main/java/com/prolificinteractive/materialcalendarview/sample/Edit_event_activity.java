@@ -33,6 +33,7 @@ public class Edit_event_activity extends AppCompatActivity {
         final EditText nom_event = (EditText) findViewById(R.id.nom_event);
         final DatePicker selectDay = (DatePicker) findViewById(R.id.selectDay);
         final EditText selectHour = (EditText) findViewById(R.id.selectHour);
+        final EditText desc = (EditText) findViewById(R.id.Descripcio);
         final int day = selectDay.getDayOfMonth();
         final int month = selectDay.getMonth();
         final int year = selectDay.getYear();
@@ -60,6 +61,7 @@ public class Edit_event_activity extends AppCompatActivity {
                 final int year = selectDay.getYear();
                 final String hour = selectHour.getText().toString();
                 final String name = nom_event.getText().toString();
+                final String descrip = desc.getText().toString();
 
 
                 mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).addValueEventListener(new ValueEventListener() {
@@ -77,7 +79,7 @@ public class Edit_event_activity extends AppCompatActivity {
                     }
                 });
                 mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).
-                        child(key).setValue(new Event(name,hour,"descripció de l'event"));
+                        child(key).setValue(new Event(name,hour,descrip));
 
                 //mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour))
 
