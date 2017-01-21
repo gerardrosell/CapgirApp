@@ -19,11 +19,11 @@ import com.google.firebase.database.ValueEventListener;
 public class Event_activity extends AppCompatActivity {
     public String año, dia, mes, fecha, id,Hora;
     private DatabaseReference mRootRef, mRootRefUsu;
-    private TextView data, hora, nom_event;
+    private TextView data, hora, nom_event, descrip;
     public String nombreEvento;
     public CheckBox Si_assisteix, No_assisteix, Va_en_bus;
     public int pos;
-
+    private String desc;
 
 
     @Override
@@ -38,10 +38,12 @@ public class Event_activity extends AppCompatActivity {
         data = (TextView)findViewById(R.id.Data);
         hora = (TextView)findViewById(R.id.hora);
         nom_event = (TextView)findViewById(R.id.nom_event);
+        descrip = (TextView)findViewById(R.id.Descripcio);
         Si_assisteix = (CheckBox)findViewById(R.id.Si);
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
         //TODO: arreglar la memoria de checks
+
         mRootRef.child(String.valueOf(pos+1)).child("Assistents").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,6 +83,7 @@ public class Event_activity extends AppCompatActivity {
 
             }
         });
+
     }
     @Override
     protected void onStart() {
@@ -93,8 +96,10 @@ public class Event_activity extends AppCompatActivity {
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
         hora.setText(Hora);
+        descrip.setText(desc);
         }
     public void recogerExtras() {
+        desc =getIntent().getExtras().getString("desc");
         año = getIntent().getExtras().getString("año");
         mes = getIntent().getExtras().getString("mes");
         dia = getIntent().getExtras().getString("dia");
