@@ -29,11 +29,14 @@
                 android:layout_height="0dp"
                 android:id="@+id/selectDay"
                 android:layout_weight="1"
-                />
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
 
-            <TimePicker
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="time"
+                android:ems="10"
                 android:id="@+id/selectHour" />
 
             <Button
