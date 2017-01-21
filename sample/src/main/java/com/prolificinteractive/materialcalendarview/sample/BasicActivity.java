@@ -57,7 +57,72 @@ public class BasicActivity extends AppCompatActivity
     private Usuario usuari;
     private int posicio, i;
     private String admins[];
+    private String id;
 
+
+
+
+
+    @Bind(R.id.calendarView)
+    MaterialCalendarView widget;
+
+    @Bind(R.id.textView)
+    TextView textView;
+    private boolean DaySelected=false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
+        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+        mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
+        id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
+        Registre(id);
+        Admin(id);
+        //findViewById(R.id.goEditEvent_btn).setEnabled( false );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_basic);
+        Firebase.setAndroidContext(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        button = (Button)findViewById(R.id.button);
+        //Usuari = new Usuario();
+
+
+        ButterKnife.bind(this);
+        widget.setOnDateChangedListener(this);
+
+        widget.addDecorators(
+                new MySelectorDecorator(this),
+                new HighlightWeekendsDecorator(),
+                oneDayDecorator
+        );
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Setup initial text
+        textView.setText(getSelectedDatesString());
+        invalidateOptionsMenu();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        MenuItem register = menu.findItem( R.id.action_settings );
+        Admin(id);
+        if(!admin){
+            register.setVisible( false );
+        }else{
+            register.setVisible( true );
+        }
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,7 +135,7 @@ public class BasicActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings && admin) {
+        if (id == R.id.action_settings) {
             Intent intent = new Intent(this, QuiSomActivity.class);
             startActivityForResult(intent,QuiSomActivity.REQUEST_NAME_QUIENES_SOMOS);
             return true;
@@ -107,53 +172,6 @@ public class BasicActivity extends AppCompatActivity
     private void goEditEvent() {
         Intent intent = new Intent(this, Edit_event_activity.class);
         startActivity(intent);
-    }
-
-    @Bind(R.id.calendarView)
-    MaterialCalendarView widget;
-
-    @Bind(R.id.textView)
-    TextView textView;
-    private boolean DaySelected=false;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
-        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
-        mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
-        String id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
-        Registre(id);
-        Admin(id);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic);
-        Firebase.setAndroidContext(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        button = (Button)findViewById(R.id.button);
-        //Usuari = new Usuario();
-
-
-        ButterKnife.bind(this);
-        widget.setOnDateChangedListener(this);
-
-        widget.addDecorators(
-                new MySelectorDecorator(this),
-                new HighlightWeekendsDecorator(),
-                oneDayDecorator
-        );
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Setup initial text
-        textView.setText(getSelectedDatesString());
     }
 
     @Override
