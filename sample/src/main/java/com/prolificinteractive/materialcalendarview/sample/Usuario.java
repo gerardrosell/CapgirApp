@@ -9,7 +9,7 @@ public class Usuario {
     public String nombre;
     public String email;
     public boolean socio;
-    public boolean admin;
+    //public boolean admin;
     public String fechaNacimiento;
     public String telefono;
 
@@ -17,7 +17,7 @@ public class Usuario {
         this.nombre = nom;
         this.email = email;
         this.socio = false;
-        this.admin = false;
+        //this.admin = true;
         this.fechaNacimiento = FNaix;
         this.telefono = NumTel;
 

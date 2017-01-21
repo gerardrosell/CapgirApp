@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 
 import com.firebase.client.Firebase;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,24 +48,31 @@ public class BasicActivity extends AppCompatActivity
     public static int REQUEST_NAME_CALENDARI = 1;
     private DatabaseReference mRootRef, mRootRefUsu;
     private DatabaseReference mRootRead, mRootReadUsu;
+    private DatabaseReference mRootRefAdmin;
     private Button button;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private String[] data;
-    //private Usuario Usuari;
+    private boolean admin = false;
+    private Usuario usuari;
+    private int posicio, i;
+    private String admins[];
 
-    /*@Override
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings && admin) {
+            Intent intent = new Intent(this, QuiSomActivity.class);
+            startActivityForResult(intent,QuiSomActivity.REQUEST_NAME_QUIENES_SOMOS);
             return true;
         }
 
@@ -110,9 +120,10 @@ public class BasicActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+        mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
         String id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
         Registre(id);
-
+        Admin(id);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic);
         Firebase.setAndroidContext(this);
@@ -242,7 +253,6 @@ public class BasicActivity extends AppCompatActivity
     }
 
     private void Registre(final String id){
-        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         final Intent intentReg = new Intent(this, RegistreActivity.class);
         mRootRefUsu.addValueEventListener(new ValueEventListener() {
             @Override
@@ -260,4 +270,72 @@ public class BasicActivity extends AppCompatActivity
         });
     }
 
+    private void Admin(final String id){
+        mRootRefAdmin.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(id)) {
+                    admin = true;
+                    //textView.setText(String.valueOf(admin));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        } );
+    }
+
+
+
+
+
+    /*public String ConvertirObjectToString(Object model) {
+        String Str="";
+        if(model!=null){
+            Str = model.toString();
+        }
+        return Str;
+    }
+
+    public String TrobarAdmin (String id){
+        mRootReadUsu = mRootRefUsu.child( id );
+        mRootReadUsu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                usuari = dataSnapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        admin = ConvertirObjectToString(usuari);
+        admin = admin.substring(0,admin.length()-1);
+        String[] separar = admin.split(",");
+        int posadmin = 0;
+        for(int j = 0; j< separar.length; j++) {
+            if (separar[j].contains( "admin" )) {
+                posadmin = j;
+            }
+        }
+        posicio = separar[posadmin].indexOf( "=" );
+        admin2 = separar[posadmin].substring( posicio+1);
+        mRootRefUsu.child( id ).child( admin2 ).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                admin3 = dataSnapshot.getValue(boolean.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return String.valueOf(admin3);
+
+    }*/
 }
