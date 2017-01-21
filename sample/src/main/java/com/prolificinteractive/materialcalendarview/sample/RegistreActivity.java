@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,9 +23,12 @@ public class RegistreActivity extends AppCompatActivity {
         final EditText Nom = (EditText) findViewById(R.id.Nom);
         final EditText Email = (EditText) findViewById(R.id.email);
         final EditText telefon = (EditText) findViewById(R.id.telefon);
-        final NumberPicker day = (NumberPicker) findViewById(R.id.day);
-        final NumberPicker month = (NumberPicker) findViewById(R.id.month);
-        final NumberPicker year = (NumberPicker) findViewById(R.id.year);
+        final DatePicker selectDayNaix = (DatePicker) findViewById(R.id.selectDayNaix);
+        final int day = selectDayNaix.getDayOfMonth();
+        final int month = selectDayNaix.getMonth();
+        final int year = selectDayNaix.getYear();
+
+
         Intent myIntent = getIntent(); // gets the previously created intent
         final String id = myIntent.getStringExtra("id");
         final Intent i = new Intent(this, BasicActivity.class);
@@ -34,7 +37,9 @@ public class RegistreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
-                mRootRefUsu.child(id).setValue(new Usuario(Nom.getText().toString(), Email.getText().toString(), String.valueOf(day.getValue())+"/"+String.valueOf(month.getValue())+"/"+String.valueOf(year.getValue()), telefon.getText().toString()));
+                mRootRefUsu.child(id).setValue(new Usuario(Nom.getText().toString(),
+                        Email.getText().toString(), String.valueOf( day )
+                        +"/"+String.valueOf( month+1 )+ "/" +String.valueOf( year ), telefon.getText().toString()));
                 startActivity(i);
             }
         });
