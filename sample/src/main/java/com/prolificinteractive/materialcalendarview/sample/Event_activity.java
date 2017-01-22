@@ -29,6 +29,7 @@ public class Event_activity extends AppCompatActivity {
     private String desc;
     private DatabaseReference mRootRefAdmin;
     private boolean admin = false;
+    public String No_ass, Si_ass, Bus, posi;
 
 
     @Override
@@ -40,6 +41,17 @@ public class Event_activity extends AppCompatActivity {
         recogerExtras();
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                nombre=dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
         mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
         data = (TextView)findViewById(R.id.Data);
@@ -68,7 +80,7 @@ public class Event_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
-                    Si_assisteix.setChecked(true);
+                    No_assisteix.setChecked(true);
                 }
             }
 
@@ -119,19 +131,22 @@ public class Event_activity extends AppCompatActivity {
         No_assisteix.setChecked(false);
         Si_assisteix.setChecked(true);
         Va_en_bus.setEnabled(true);
+        No_assisteix.setEnabled(true);
+        No_assisteix.setChecked(false);
     }
     public void ChkNo(android.view.View view){
         No_assisteix.setChecked(true);
         Si_assisteix.setChecked(false);
+        Si_assisteix.setEnabled(true);
         Va_en_bus.setEnabled(false);
         Va_en_bus.setChecked(false);
     }
 
     public void Bus(android.view.View view){
-        No_assisteix.setChecked(true);
+        No_assisteix.setChecked(false);
         Si_assisteix.setChecked(true);
         Si_assisteix.setEnabled(true);
-        No_assisteix.setEnabled(false);
+        No_assisteix.setEnabled(true);
 
     }
 
@@ -139,22 +154,10 @@ public class Event_activity extends AppCompatActivity {
         mRootRefUsu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String No_ass = (No_assisteix.isChecked() ? "True" : "False");
-                String Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
-                String Bus = (Va_en_bus.isChecked() ? "True" : "False");
-                String posi = String.valueOf(pos+1);
-
-                mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        nombre=dataSnapshot.getValue().toString();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                No_ass = (No_assisteix.isChecked() ? "True" : "False");
+                Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
+                Bus = (Va_en_bus.isChecked() ? "True" : "False");
+                posi = String.valueOf(pos+1);
 
                 if(No_ass.equals( "True" )){
                     mRootRef.child(posi).child("Assistents").child(id).removeValue();
