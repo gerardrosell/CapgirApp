@@ -60,10 +60,6 @@ public class BasicActivity extends AppCompatActivity
     private String admins[];
     private String id;
 
-
-
-
-
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
 
@@ -183,7 +179,7 @@ public class BasicActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            this.finishAffinity();
         }
     }
 
