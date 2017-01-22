@@ -52,7 +52,16 @@
     <string name="e_mail" translatable="false">e-mail</string>
     <string name="registra_m">Registra\'m</string>
     <string name="Participants">Participants</string>
+    <string name="Texto_contacto">
+        <![CDATA[
 
+        Per a tràmits administratius i postals, la nostra adreça oficial és:<br />
+        Colla Castellers de Castellar del Vallès\r\nPlaça del Mirador s/n <br />
+08211 – Castellar del Vallès<br/>
+Tot i així, ens trobareu cada Dilluns i Divendres de 19:30h a 22:30h al nostre espai d’assaig:<br />
+Espai Tolrà<br />
+C/Portugal s/n 08211 – Castellar del Vallès
+]]></string>
 
 
 </resources>
