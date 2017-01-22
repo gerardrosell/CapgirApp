@@ -107,10 +107,7 @@ public class Event_activity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /* corrección del valor del mes*/
-        int mes_a_corregir = Integer.parseInt(mes);
-        int mes_corregido = mes_a_corregir+1;
-        mes = String.valueOf(mes_corregido);
+
         fecha = dia+"/"+mes+"/"+año;
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
@@ -121,6 +118,7 @@ public class Event_activity extends AppCompatActivity {
         desc =getIntent().getExtras().getString("desc");
         año = getIntent().getExtras().getString("año");
         mes = getIntent().getExtras().getString("mes");
+        mes = String.valueOf(Integer.parseInt(mes)+1);
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
         pos = getIntent().getExtras().getInt("pos");
