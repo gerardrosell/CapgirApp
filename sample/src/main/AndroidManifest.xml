@@ -32,7 +32,8 @@
             android:name=".QuiSomActivity"
             android:label="QuiSom"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RegistreActivity"></activity>
+        <activity android:name=".RegistreActivity" />
+        <activity android:name=".ParticipantsListActivity"></activity>
     </application>
 
 </manifest>
