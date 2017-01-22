@@ -55,7 +55,7 @@ public class Event_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
-                    Si_assisteix.setEnabled(true);
+                    Si_assisteix.setChecked(true);
                 }
             }
 
@@ -64,11 +64,11 @@ public class Event_activity extends AppCompatActivity {
 
             }
         });
-        mRootRef.child(String.valueOf(pos+1)).child("No_Assistents").addValueEventListener(new ValueEventListener() {
+        mRootRef.child(String.valueOf(pos+1)).child("No_Assist").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
-                    Si_assisteix.setEnabled(true);
+                    Si_assisteix.setChecked(true);
                 }
             }
 
@@ -81,7 +81,7 @@ public class Event_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
-                    Va_en_bus.setEnabled(true);
+                    Va_en_bus.setChecked(true);
                 }
             }
 

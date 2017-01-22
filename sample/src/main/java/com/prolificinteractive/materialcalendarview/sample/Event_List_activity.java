@@ -110,23 +110,6 @@ public class Event_List_activity  extends AppCompatActivity  {
                         posD = sep[posDesc].indexOf( "," );
                         Desc = sep[posDesc].substring( 0,posD );
 
-
-                        /*if(sep[posAs].contains("Description")){
-                            Assist=sep[posAs].substring(0,sep[posAs].length()-11);
-                        } else if(sep[posAs].contains("Name")){
-                            Assist=sep[posAs].substring(0,sep[posAs].length()-4);
-                        } else if(sep[posAs].contains("hour")){
-                            Assist=sep[posAs].substring(0,sep[posAs].length()-4);
-                        } else if(sep[posAs].contains("Va en Bus")){
-                            Assist=sep[posAs].substring(0,sep[posAs].length()-9);
-                        } else if(sep[posAs].contains("No_Assist")){
-                            Assist=sep[posAs].substring(0,sep[posAs].length()-9);
-                        } else{
-                            Assist=sep[posAs];
-                        }
-
-                        int participen=round(Assist.length()/16);*/
-
                         nombreEvento[i] = nom;
                         descripcions[i] = Desc;
                         hores[i] = hora;
@@ -180,21 +163,6 @@ public class Event_List_activity  extends AppCompatActivity  {
         return Str;
     }
 
-    /*public void BuscarParticipants(long NumAct){
-        for(q = 1; q<=NumAct; q++){
-            mRootRead=mRootRef.child(String.valueOf(q)).child( "Assistents" );
-            mRootRead.addValueEventListener( new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    cont = dataSnapshot.getChildrenCount();
-                    participants[q] = String.format( Locale.getDefault(), "%d", cont);
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
-        }
-    }*/
 }
 
