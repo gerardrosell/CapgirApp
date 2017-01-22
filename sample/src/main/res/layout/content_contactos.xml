@@ -21,10 +21,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:ems="10"
         android:id="@+id/informacio_contacte"
-        android:text="@string/dades_del_contacte"
+        android:text="@string/Texto_contacto"
         android:textAlignment="center" />
 
     </RelativeLayout>
