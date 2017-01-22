@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,6 +35,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     //public long quantitatEvents;
     public long cont;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +61,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("nombre", nombreEvento[pos]);
         intent.putExtra("pos",pos);
         intent.putExtra("hora",hora);
+        intent.putExtra("desc", Desc);
         startActivity(intent);
     }
 
