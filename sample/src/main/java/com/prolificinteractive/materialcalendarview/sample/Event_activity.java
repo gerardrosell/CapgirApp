@@ -1,6 +1,7 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
 
+import android.content.pm.ActivityInfo;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.content.Intent;
@@ -30,6 +31,7 @@ public class Event_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_activity);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Firebase.setAndroidContext(this);
         recogerExtras();
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
