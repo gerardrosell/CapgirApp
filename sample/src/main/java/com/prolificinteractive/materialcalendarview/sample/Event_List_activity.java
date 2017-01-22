@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String dia;
     public String mes;
     public String nombreEvento[], participants[];
-    public int i, pos, pos2, posAss, posD, q;;
+    public int i, pos, pos2, posAss, posD, q, r;
     public int posicion_lista;
     public long NAct;
     //public Object participants;
@@ -47,14 +48,13 @@ public class Event_List_activity  extends AppCompatActivity  {
         recogerExtras();
         participants = new String[1000];
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
-        BuscarParticipants( NAct );
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //BuscarParticipants( NAct );
         nombreEvento = new String[1000];
         descripcions = new String[1000];
         hores = new String[1000];
-
         posicion_lista = 0;
     }
 
@@ -111,8 +111,9 @@ public class Event_List_activity  extends AppCompatActivity  {
                         descripcions[i] = Desc;
                         hores[i] = hora;
 
+
                         viewHolder.nombre.setText(nom);//event);
-                        viewHolder.participantes.setText(participants[i]);
+                        viewHolder.participantes.setText(hores[i]);
                         viewHolder.activity = Event_List_activity.this;
                         i++;
                     }
@@ -161,13 +162,12 @@ public class Event_List_activity  extends AppCompatActivity  {
     public void BuscarParticipants(long NumAct){
         for(q = 1; q<=NumAct; q++){
             mRootRead=mRootRef.child(String.valueOf(q)).child( "Assistents" );
-            mRootRead.addValueEventListener(new ValueEventListener() {
+            mRootRead.addValueEventListener( new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     cont = dataSnapshot.getChildrenCount();
                     participants[q] = String.format( Locale.getDefault(), "%d", cont);
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
@@ -175,6 +175,5 @@ public class Event_List_activity  extends AppCompatActivity  {
             });
         }
     }
-
 }
 
