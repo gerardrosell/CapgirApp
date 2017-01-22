@@ -210,6 +210,7 @@ public class BasicActivity extends AppCompatActivity
             String dia = data[2];
             intent.putExtra("dia", dia);
             intent.putExtra( "cont", cont );
+            intent.putExtra("admin",admin);
 
 
 
