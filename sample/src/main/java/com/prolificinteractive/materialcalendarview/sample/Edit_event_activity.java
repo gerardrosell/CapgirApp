@@ -1,6 +1,7 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class Edit_event_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_event_activity);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
 
         Button create_btn = (Button) findViewById(R.id.create_btn);

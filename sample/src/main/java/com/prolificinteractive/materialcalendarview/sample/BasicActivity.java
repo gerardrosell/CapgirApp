@@ -1,6 +1,7 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
@@ -59,10 +60,6 @@ public class BasicActivity extends AppCompatActivity
     private String admins[];
     private String id;
 
-
-
-
-
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
 
@@ -82,6 +79,7 @@ public class BasicActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_basic);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Firebase.setAndroidContext(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -181,7 +179,7 @@ public class BasicActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            this.finishAffinity();
         }
     }
 
