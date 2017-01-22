@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:onClick="goEvent">
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_background_light"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line">
         <TextView
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
             android:inputType="none"
-            android:ems="10"
+            android:layout_weight="1"
             android:id="@+id/nomActivitat"
             android:textSize="25sp"
             android:textAlignment="center"
@@ -16,15 +27,19 @@
             android:paddingBottom="10dp" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:ems="10"
-                android:textSize="25sp"
-                android:id="@+id/participantsActivitat"
-                android:textAlignment="center"
-                android:paddingBottom="10dp"
-                android:padding="10dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100"
+            android:id="@+id/participantsActivitat"
+            android:textAlignment="center"
+            android:paddingBottom="10dp"
+            android:padding="10dp"
+            android:background="@drawable/round"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="normal|bold|italic"
+            />
+    </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
