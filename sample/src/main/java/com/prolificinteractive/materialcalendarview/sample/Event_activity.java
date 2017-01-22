@@ -1,17 +1,15 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.content.Intent;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -25,7 +23,7 @@ public class Event_activity extends AppCompatActivity {
     public String año, dia, mes, fecha, id,Hora;
     private DatabaseReference mRootRef, mRootRefUsu;
     private TextView data, hora, nom_event, descrip;
-    public String nombreEvento;
+    public String nombreEvento, nombre;
     public CheckBox Si_assisteix, No_assisteix, Va_en_bus;
     public int pos;
     private String desc;
@@ -137,15 +135,28 @@ public class Event_activity extends AppCompatActivity {
                 String Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
                 String Bus = (Va_en_bus.isChecked() ? "True" : "False");
                 String posi = String.valueOf(pos+1);
+
+                mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        nombre=dataSnapshot.getValue().toString();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
                 if(No_ass.equals( "True" )){
                     mRootRef.child(posi).child("Assistents").child(id).removeValue();
                     mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
-                    mRootRef.child(posi).child("No_Assist").child(id).setValue(id);
+                    mRootRef.child(posi).child("No_Assist").child(id).setValue(nombre);
                 }else if (Si_ass.equals( "True" )){
-                    mRootRef.child(posi).child("Assistents").child(id).setValue(id);
+                    mRootRef.child(posi).child("Assistents").child(id).setValue(nombre);
                     mRootRef.child(posi).child("No_Assist").child(id).removeValue();
                     if (Bus.equals( "True" )){
-                        mRootRef.child(posi).child("Va En Bus").child(id).setValue(id);
+                        mRootRef.child(posi).child("Va En Bus").child(id).setValue(nombre);
                     }
                     else{
                         mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
@@ -221,7 +232,7 @@ public class Event_activity extends AppCompatActivity {
             }
         } );
     }
-    @Override
+    /*@Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -229,5 +240,5 @@ public class Event_activity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 }
