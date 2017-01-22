@@ -34,6 +34,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     //public Object participants;
     //public long quantitatEvents;
     public long cont;
+    private String[] descripcions, hores;
 
 
     @Override
@@ -42,13 +43,16 @@ public class Event_List_activity  extends AppCompatActivity  {
         setContentView(R.layout.activity_event_list_activity);
         Firebase.setAndroidContext(this);
         recogerExtras();
+        participants = new String[1000];
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
         BuscarParticipants( NAct );
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        nombreEvento = new String[10000];
-        i = 0;
+        nombreEvento = new String[1000];
+        descripcions = new String[1000];
+        hores = new String[1000];
+
         posicion_lista = 0;
     }
 
@@ -60,8 +64,8 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("dia", dia);
         intent.putExtra("nombre", nombreEvento[pos]);
         intent.putExtra("pos",pos);
-        intent.putExtra("hora",hora);
-        intent.putExtra("desc", Desc);
+        intent.putExtra("hora",hores[pos]);
+        intent.putExtra("desc", descripcions[pos]);
         startActivity(intent);
     }
 
@@ -102,6 +106,8 @@ public class Event_List_activity  extends AppCompatActivity  {
                         posD = sep[posDesc].indexOf( "," );
                         Desc = sep[posDesc].substring( 0,posD );
                         nombreEvento[i] = nom;
+                        descripcions[i] = Desc;
+                        hores[i] = hora;
 
                         viewHolder.nombre.setText(nom);//event);
                         viewHolder.participantes.setText(participants[i]);
@@ -157,7 +163,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     cont = dataSnapshot.getChildrenCount();
-                    participants[q-1] = String.format( Locale.getDefault(), "%d", cont);
+                    participants[q] = String.format( Locale.getDefault(), "%d", cont);
                 }
 
                 @Override

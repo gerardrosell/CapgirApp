@@ -64,7 +64,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/app_primary"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 </RelativeLayout>
 
 

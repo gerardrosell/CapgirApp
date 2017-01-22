@@ -1,5 +1,6 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -81,7 +82,9 @@ public class Edit_event_activity extends AppCompatActivity {
                 mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).
                         child(key).setValue(new Event(name,hour,descrip));
 
-                //mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour))
+                //mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour)
+                Intent intent = new Intent(Edit_event_activity.this, BasicActivity.class);
+                startActivity(intent);
 
 
             }
