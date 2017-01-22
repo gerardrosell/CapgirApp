@@ -127,6 +127,14 @@ public class Event_activity extends AppCompatActivity {
         Va_en_bus.setChecked(false);
     }
 
+    public void Bus(android.view.View view){
+        No_assisteix.setChecked(true);
+        Si_assisteix.setChecked(true);
+        Si_assisteix.setEnabled(true);
+        No_assisteix.setEnabled(false);
+
+    }
+
     public void ck(android.view.View view){
         mRootRefUsu.addValueEventListener(new ValueEventListener() {
             @Override
