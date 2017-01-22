@@ -12,14 +12,8 @@ import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Locale;
 
 public class Event_List_activity  extends AppCompatActivity  {
 
@@ -32,6 +26,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public String nombreEvento[], participants[];
     public int i, pos, pos2, posAss, posD, q, r;
     public int posicion_lista;
+    public int participen = 0;
     public long NAct;
     //public Object participants;
     //public long quantitatEvents;
@@ -82,6 +77,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                     @Override
                     protected void populateViewHolder(MessageViewHolder viewHolder, Object model, int position) {
 
+                        participen=0;
                         event = ConvertirObjectToString(model);
                         event = event.substring(0,event.length()-1);
                         event = event + ",";
@@ -90,6 +86,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                         int poshora = 0;
                         int posAs = 0;
                         int posDesc = 0;
+
                         for(int j = 0; j< sep.length; j++){
                             if (sep[j].contains("Name")){
                                 posnombre = j+1;
@@ -100,6 +97,11 @@ public class Event_List_activity  extends AppCompatActivity  {
                             if (sep[j].contains("Description")){
                                 posDesc = j+1;
                             }
+                            if (sep[j].contains("Assistents")){
+                                for(posAs=j+1; !sep[posAs].contains("Description") && !sep[posAs].contains("Name") && !sep[posAs].contains("hour") && !sep[posAs].contains("Va En Bus") && !sep[posAs].contains("No_Assist") && posAs<sep.length-1 ;posAs++){
+                                    participen++;
+                                }
+                            }
                         }
                         pos = sep[posnombre].indexOf( "," );
                         nom = sep[posnombre].substring(0,pos);
@@ -107,15 +109,34 @@ public class Event_List_activity  extends AppCompatActivity  {
                         hora = sep[poshora].substring(0,pos2);
                         posD = sep[posDesc].indexOf( "," );
                         Desc = sep[posDesc].substring( 0,posD );
+
+
+                        /*if(sep[posAs].contains("Description")){
+                            Assist=sep[posAs].substring(0,sep[posAs].length()-11);
+                        } else if(sep[posAs].contains("Name")){
+                            Assist=sep[posAs].substring(0,sep[posAs].length()-4);
+                        } else if(sep[posAs].contains("hour")){
+                            Assist=sep[posAs].substring(0,sep[posAs].length()-4);
+                        } else if(sep[posAs].contains("Va en Bus")){
+                            Assist=sep[posAs].substring(0,sep[posAs].length()-9);
+                        } else if(sep[posAs].contains("No_Assist")){
+                            Assist=sep[posAs].substring(0,sep[posAs].length()-9);
+                        } else{
+                            Assist=sep[posAs];
+                        }
+
+                        int participen=round(Assist.length()/16);*/
+
                         nombreEvento[i] = nom;
                         descripcions[i] = Desc;
                         hores[i] = hora;
 
 
                         viewHolder.nombre.setText(nom);//event);
-                        viewHolder.participantes.setText(hores[i]);
+                        viewHolder.participantes.setText(String.valueOf(participen));
                         viewHolder.activity = Event_List_activity.this;
                         i++;
+
                     }
 
 
@@ -159,7 +180,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         return Str;
     }
 
-    public void BuscarParticipants(long NumAct){
+    /*public void BuscarParticipants(long NumAct){
         for(q = 1; q<=NumAct; q++){
             mRootRead=mRootRef.child(String.valueOf(q)).child( "Assistents" );
             mRootRead.addValueEventListener( new ValueEventListener() {
@@ -174,6 +195,6 @@ public class Event_List_activity  extends AppCompatActivity  {
                 }
             });
         }
-    }
+    }*/
 }
 
