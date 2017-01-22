@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CAPG!RAPP</string>
+    <string name="Participants">Participants</string>
+    <string name="action_settings">Settings</string>
+    <string name="calendari">Calendar</string>
+    <string name="contactos">Contacts</string>
+    <string name="crea_event">Create Event</string>
+    <string name="dades_del_contacte">Contact Information</string>
+    <string name="data_de_naixement">Birthdate</string>
+    <string name="descripci_de_la_colla">Description of the \"Colla\"</string>
+    <string name="nom">Name</string>
+    <string name="n_mero_de_tel_fon">Phone Number</string>
+    <string name="quienes_somos">Who We Are</string>
+    <string name="registra_m">Register</string>
+</resources>

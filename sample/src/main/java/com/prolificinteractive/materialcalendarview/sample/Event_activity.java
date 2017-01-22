@@ -27,8 +27,8 @@ public class Event_activity extends AppCompatActivity {
     public CheckBox Si_assisteix, No_assisteix, Va_en_bus;
     public int pos;
     private String desc;
-    private DatabaseReference mRootRefAdmin;
-    private boolean admin = false;
+    //private DatabaseReference mRootRefAdmin;
+    private boolean admin ;//= false;
     public String No_ass, Si_ass, Bus, posi;
 
 
@@ -53,7 +53,7 @@ public class Event_activity extends AppCompatActivity {
             }
         });
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
-        mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
+        //mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
         data = (TextView)findViewById(R.id.Data);
         hora = (TextView)findViewById(R.id.hora);
         nom_event = (TextView)findViewById(R.id.nom_event);
@@ -125,6 +125,7 @@ public class Event_activity extends AppCompatActivity {
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
         pos = getIntent().getExtras().getInt("pos");
         Hora = getIntent().getExtras().getString("hora");
+        admin = getIntent().getExtras().getBoolean("admin");
     }
 
     public void ChkSi(android.view.View view){
@@ -191,17 +192,17 @@ public class Event_activity extends AppCompatActivity {
     }
 
 
-    /*@Override
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu){
         MenuItem register = menu.findItem( R.id.goParticipants_btn );
-        Admin(id);
+        //Admin(id);
         if(!admin){
             register.setVisible( false );
         }else{
             register.setVisible( true );
         }
         return true;
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -227,7 +228,7 @@ public class Event_activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void Admin(final String id){
+    /*private void Admin(final String id){
         mRootRefAdmin.addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -242,7 +243,7 @@ public class Event_activity extends AppCompatActivity {
 
             }
         } );
-    }
+    }*/
     /*@Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
