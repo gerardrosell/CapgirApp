@@ -217,7 +217,7 @@ public class Event_activity extends AppCompatActivity {
         if (id == R.id.goParticipants_btn) {
             Intent intent = new Intent(this, ParticipantsListActivity.class);
             intent.putExtra("año", año);
-            intent.putExtra("mes", mes);
+            intent.putExtra("mes", mes+1);
             intent.putExtra("dia", dia);
             intent.putExtra("nombre",nombreEvento);
             intent.putExtra("pos",pos);
