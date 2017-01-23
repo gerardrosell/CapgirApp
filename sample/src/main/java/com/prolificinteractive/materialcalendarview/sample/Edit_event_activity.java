@@ -40,20 +40,6 @@ public class Edit_event_activity extends AppCompatActivity {
         final int month = selectDay.getMonth();
         final int year = selectDay.getYear();
 
-        mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                long cont = dataSnapshot.getChildrenCount();
-                cont++;
-                Log.v("cont: ", String.format(Locale.getDefault(), "%d", cont));
-                key = String.format(Locale.getDefault(), "%d", cont);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         create_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +50,23 @@ public class Edit_event_activity extends AppCompatActivity {
                 final String hour = selectHour.getText().toString();
                 final String name = nom_event.getText().toString();
                 final String descrip = desc.getText().toString();
+
+                mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            long cont = dataSnapshot.getChildrenCount();
+                            cont++;
+                            Log.v("cont: ", String.format(Locale.getDefault(), "%d", cont));
+                            key = String.format(Locale.getDefault(), "%d", cont);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
                 mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).addValueEventListener(new ValueEventListener() {
