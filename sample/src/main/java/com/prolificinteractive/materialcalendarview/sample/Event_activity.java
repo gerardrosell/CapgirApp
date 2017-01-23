@@ -30,6 +30,7 @@ public class Event_activity extends AppCompatActivity {
     //private DatabaseReference mRootRefAdmin;
     private boolean admin ;//= false;
     public String No_ass, Si_ass, Bus, posi;
+    private String mes2;
 
 
     @Override
@@ -108,7 +109,7 @@ public class Event_activity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        fecha = dia+"/"+mes+"/"+año;
+        fecha = dia+"/"+mes2+"/"+año;
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
         hora.setText(Hora);
@@ -118,7 +119,7 @@ public class Event_activity extends AppCompatActivity {
         desc =getIntent().getExtras().getString("desc");
         año = getIntent().getExtras().getString("año");
         mes = getIntent().getExtras().getString("mes");
-        mes = String.valueOf(Integer.parseInt(mes)+1);
+        mes2 = String.valueOf(Integer.parseInt(mes)+1);
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");//recogemos el nombre del evento para no volverlo a leer de firebase
         pos = getIntent().getExtras().getInt("pos");
