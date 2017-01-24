@@ -34,6 +34,8 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -66,6 +68,7 @@ public class BasicActivity extends AppCompatActivity
     @Bind(R.id.textView)
     TextView textView;
     private boolean DaySelected=false;
+    private Collection<CalendarDay> vector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +90,39 @@ public class BasicActivity extends AppCompatActivity
         button = (Button)findViewById(R.id.button);
         //Usuari = new Usuario();
 
+        ArrayList<CalendarDay> mesActual;
+
+
+
 
         ButterKnife.bind(this);
         widget.setOnDateChangedListener(this);
 
+
+        //final int mesAct = CalendarDay.today().getMonth();
+        //final int anyAct = CalendarDay.today().getYear();
+
+        /*for(int k = 1;k<31; k++){
+            final int finalK = k;
+            //mRootRef.child(String.valueOf(anyAct)).child(String.valueOf(mesAct)).child(String.valueOf(k)).addValueEventListener(new ValueEventListener() {
+            //    @Override
+            //    public void onDataChange(DataSnapshot dataSnapshot) {
+                    //if(dataSnapshot.hasChild("1")){
+                        vector.add(CalendarDay.from(anyAct,mesAct,finalK));
+                    //}
+            //    }
+
+            //    @Override
+            //    public void onCancelled(DatabaseError databaseError) {
+
+            //    }
+            //});
+        }*/
+
         widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
+                //new EventDecorator(Color.RED, vector),
                 oneDayDecorator
         );
 
