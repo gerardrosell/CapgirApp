@@ -13,4 +13,8 @@
     <string name="nom">Nombre</string>
     <string name="quienes_somos">Quienes Somos</string>
     <string name="registra_m">Registrame</string>
+    <string name="si">Si</string>
+    <string name="apuntat">Apúntate</string>
+    <string name="Texto_contacto">Información de Contacto</string>
+    <string name="assistencia">Asistencia</string>
 </resources>

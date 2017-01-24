@@ -53,6 +53,9 @@
     <string name="registra_m">Registra\'m</string>
     <string name="Participants">Participants</string>
     <string name="Texto_contacto">Informació de Contacte</string>
+    <string name="si">Si</string>
+    <string name="apuntat">Apuntat</string>
+    <string name="assistencia">Assistència</string>
 
 
 </resources>

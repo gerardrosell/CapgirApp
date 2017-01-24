@@ -8,7 +8,7 @@
     >
 
     <Button
-        android:text="Calendari"
+        android:text="@string/calendari"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -125,7 +125,7 @@
             android:weightSum="4">
 
             <TextView
-                android:text="Assistència"
+                android:text="@string/assistencia"
                 android:layout_width="0dp"
                 android:padding="10dp"
                 android:textSize="30dp"
@@ -143,7 +143,7 @@
                 android:background="@color/app_primary" />
 
             <CheckBox
-                android:text="Si"
+                android:text="@string/si"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Si"
@@ -186,7 +186,7 @@
                 android:background="@color/app_primary" />
 
             <CheckBox
-                android:text="Si"
+                android:text="@string/si"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/bus_si"
@@ -215,7 +215,7 @@
             android:id="@+id/apunta">
 
             <Button
-                android:text="Apuntat"
+                android:text="@string/apuntat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button3"

@@ -13,4 +13,8 @@
     <string name="n_mero_de_tel_fon">Phone Number</string>
     <string name="quienes_somos">Who We Are</string>
     <string name="registra_m">Register</string>
+    <string name="si">Yes</string>
+    <string name="apuntat">Register</string>
+    <string name="Texto_contacto">Contact Information</string>
+    <string name="assistencia">Assistance</string>
 </resources>
