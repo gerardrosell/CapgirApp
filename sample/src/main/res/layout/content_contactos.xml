@@ -25,7 +25,8 @@
         android:ems="10"
         android:id="@+id/informacio_contacte"
         android:text="@string/Texto_contacto"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:focusable="true"/>
 
     </RelativeLayout>
 

@@ -10,6 +10,8 @@ android {
         targetSdkVersion 25
         versionCode project.ext.versionCodeInt
         versionName version
+        multiDexEnabled true
+
     }
 
     android {
@@ -45,6 +47,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.2'
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:multidex:1.0.0'
     testCompile 'junit:junit:4.12'
 }
 

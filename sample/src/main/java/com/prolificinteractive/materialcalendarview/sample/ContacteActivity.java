@@ -33,6 +33,7 @@ public class ContacteActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         text_contacte = (TextView) findViewById(R.id.informacio_contacte);
+        //text_contacte.setText( String.format(getString(R.string.detalle), "\n"));
         //text_contacte.setText( Html.fromHtml(getResources().getString( R.string.Salt_de_linia )) );
 
 
