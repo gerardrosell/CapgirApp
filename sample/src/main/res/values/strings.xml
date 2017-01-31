@@ -57,6 +57,7 @@
     <string name="apuntat">Apuntat</string>
     <string name="assistencia">Assistència</string>
     <string name="No_Participants">No Assistents</string>
+    <string name="Bus_Participants">Llista Bus</string>
 
 
 </resources>

@@ -18,6 +18,7 @@
     <string name="Texto_contacto">Informació de Contacte</string>
     <string name="assistencia">Assistència</string>
     <string name="No_Participants">No Assistents</string>
+    <string name="Bus_Participants">Llista Bus</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

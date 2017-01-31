@@ -235,6 +235,17 @@ public class Event_activity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.goBus_btn) {
+            Intent intent = new Intent(this, BusParticipantsListActivity.class);
+            intent.putExtra("año", año);
+            intent.putExtra("mes", mes+1);
+            intent.putExtra("dia", dia);
+            intent.putExtra("nombre",nombreEvento);
+            intent.putExtra("pos",pos);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
     /*private void Admin(final String id){

@@ -11,7 +11,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class NoParticipantsListActivity extends AppCompatActivity {
+public class BusParticipantsListActivity extends AppCompatActivity {
     public String año, dia, mes,nombreEvento;
     private DatabaseReference mRootRef;
     public int pos;
@@ -23,7 +23,7 @@ public class NoParticipantsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_participants_list);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         recogerExtras();
-        mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia).child(String.valueOf(pos)).child("No_Assist");
+        mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia).child(String.valueOf(pos)).child("Va En Bus");
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
