@@ -164,9 +164,22 @@ public class BasicActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.goEditEvent_btn) {
-            Intent intent = new Intent(this, Edit_event_activity.class);
-            startActivity(intent);
-            return true;
+            if (!DaySelected){
+                Toast toast = Toast.makeText(this, "No hi ha cap dia seleccionat", Toast.LENGTH_LONG);
+
+                toast.show();
+            } else {
+                Intent intent = new Intent(this, Edit_event_activity.class);
+                String año = data[0];
+                intent.putExtra("año", año);
+                String mes = data[1];
+                intent.putExtra("mes", mes);
+                String dia = data[2];
+                intent.putExtra("dia", dia);
+                intent.putExtra( "cont", cont );
+                startActivity(intent);
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);

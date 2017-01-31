@@ -7,6 +7,9 @@
         android:id="@+id/goEditEvent_btn"
         android:title="@string/crea_event"
         android:orderInCategory="100"
-        app:showAsAction="never"
-        />
+        app:showAsAction="always"
+        android:visible="true"
+        android:enabled="true"
+        android:checkable="true"
+        android:icon="@android:drawable/ic_menu_add" />
 </menu>
