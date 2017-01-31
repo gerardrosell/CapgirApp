@@ -3,5 +3,7 @@
 
     <item android:title="@string/Participants"
         android:id="@+id/goParticipants_btn" />
+    <item android:title="@string/No_Participants"
+        android:id="@+id/goNoParticipants_btn" />
 
 </menu>

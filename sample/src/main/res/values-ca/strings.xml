@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CAPG!RAPP</string>
-    <string name="Participants">Participants</string>
+    <string name="Participants">Assistents</string>
     <string name="action_settings">Configuració</string>
     <string name="calendari">Calendari</string>
     <string name="contactos">Contactes</string>
@@ -17,6 +17,7 @@
     <string name="apuntat">Apuntat</string>
     <string name="Texto_contacto">Informació de Contacte</string>
     <string name="assistencia">Assistència</string>
+    <string name="No_Participants">No Assistents</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

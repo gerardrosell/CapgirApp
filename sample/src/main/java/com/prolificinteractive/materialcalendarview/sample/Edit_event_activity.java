@@ -20,7 +20,6 @@ public class Edit_event_activity extends AppCompatActivity {
 
     private DatabaseReference mRootRef;
     private String key;
-    private String hour;
     private String año;
     private String mes, mes2;
     private String dia;
@@ -41,20 +40,12 @@ public class Edit_event_activity extends AppCompatActivity {
         final TextView showDate = (TextView) findViewById(R.id.showDate);
         mes2 = String.valueOf(Integer.parseInt(mes)+1);
         showDate.setText(dia+"/"+mes2+"/"+año);
-        //final DatePicker selectDay = (DatePicker) findViewById(R.id.selectDay);
         final TimePicker selectHour = (TimePicker) findViewById(R.id.selectHour);
         final EditText desc = (EditText) findViewById(R.id.Descripcio);
-        //final int day = selectDay.getDayOfMonth();
-        //final int month = selectDay.getMonth();
-        //final int year = selectDay.getYear();
-
 
         create_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //final int day = selectDay.getDayOfMonth();
-                //final int month = selectDay.getMonth();
-                //final int year = selectDay.getYear();
                 final String hour;
                 if (Build.VERSION.SDK_INT < 23) {
                     hour = String.valueOf(selectHour.getCurrentHour())+":"+String.valueOf(selectHour.getCurrentMinute());
@@ -64,38 +55,6 @@ public class Edit_event_activity extends AppCompatActivity {
                 final String name = nom_event.getText().toString();
                 final String descrip = desc.getText().toString();
 
-                /*mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //if(dataSnapshot.exists()){
-                            long cont = dataSnapshot.getChildrenCount();
-                            cont++;
-                            Log.v("cont: ", String.format(Locale.getDefault(), "%d", cont));
-                            key = String.format(Locale.getDefault(), "%d", cont);
-                        //}
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
-                mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        long cont = dataSnapshot.getChildrenCount();
-                        cont++;
-                        Log.v("cont: ", String.format(Locale.getDefault(), "%d", cont));
-                        key = String.format(Locale.getDefault(), "%d", cont);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });*/
                 mRootRef.child(String.valueOf(año)).child(String.valueOf(mes)).child(String.valueOf(dia)).
                         child(key).setValue(new Event(name,hour,descrip));
 

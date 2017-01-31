@@ -224,6 +224,16 @@ public class Event_activity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if (id == R.id.goNoParticipants_btn) {
+            Intent intent = new Intent(this, NoParticipantsListActivity.class);
+            intent.putExtra("año", año);
+            intent.putExtra("mes", mes+1);
+            intent.putExtra("dia", dia);
+            intent.putExtra("nombre",nombreEvento);
+            intent.putExtra("pos",pos);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

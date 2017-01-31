@@ -56,6 +56,7 @@
     <string name="si">Si</string>
     <string name="apuntat">Apuntat</string>
     <string name="assistencia">Assistència</string>
+    <string name="No_Participants">No Assistents</string>
 
 
 </resources>
