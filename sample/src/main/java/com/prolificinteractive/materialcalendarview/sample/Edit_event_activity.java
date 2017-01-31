@@ -19,7 +19,7 @@ public class Edit_event_activity extends AppCompatActivity {
 
     private DatabaseReference mRootRef;
     private String key;
-    private int hour;
+    private String hour;
     private String año;
     private String mes, mes2;
     private String dia;
@@ -54,7 +54,7 @@ public class Edit_event_activity extends AppCompatActivity {
                 //final int day = selectDay.getDayOfMonth();
                 //final int month = selectDay.getMonth();
                 //final int year = selectDay.getYear();
-                final String hour = "10:00";//selectHour.getText().toString();
+                final String hour = String.valueOf(selectHour.getCurrentHour())+":"+String.valueOf(selectHour.getCurrentMinute());//selectHour.getText().toString();
                 final String name = nom_event.getText().toString();
                 final String descrip = desc.getText().toString();
 
