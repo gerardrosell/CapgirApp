@@ -2,6 +2,7 @@ package com.prolificinteractive.materialcalendarview.sample;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -54,7 +55,12 @@ public class Edit_event_activity extends AppCompatActivity {
                 //final int day = selectDay.getDayOfMonth();
                 //final int month = selectDay.getMonth();
                 //final int year = selectDay.getYear();
-                final String hour = String.valueOf(selectHour.getCurrentHour())+":"+String.valueOf(selectHour.getCurrentMinute());//selectHour.getText().toString();
+                final String hour;
+                if (Build.VERSION.SDK_INT < 23) {
+                    hour = String.valueOf(selectHour.getCurrentHour())+":"+String.valueOf(selectHour.getCurrentMinute());
+                } else {
+                    hour = String.valueOf(selectHour.getHour())+":"+String.valueOf(selectHour.getMinute());
+                }
                 final String name = nom_event.getText().toString();
                 final String descrip = desc.getText().toString();
 
