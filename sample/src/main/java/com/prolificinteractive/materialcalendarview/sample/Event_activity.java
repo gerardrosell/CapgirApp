@@ -243,13 +243,17 @@ public class Event_activity extends AppCompatActivity {
         }
 
         if (id == R.id.goBus_btn) {
-            Intent intent = new Intent(this, BusParticipantsListActivity.class);
+            if(busnecessari){Intent intent = new Intent(this, BusParticipantsListActivity.class);
             intent.putExtra("año", año);
             intent.putExtra("mes", mes+1);
             intent.putExtra("dia", dia);
             intent.putExtra("nombre",nombreEvento);
             intent.putExtra("pos",pos);
-            startActivity(intent);
+            startActivity(intent);}
+            else{
+                Toast toast = Toast.makeText(this, "Aquesta activitat no té llista de BUS", Toast.LENGTH_LONG);
+                toast.show();
+            }
             return true;
         }
 
