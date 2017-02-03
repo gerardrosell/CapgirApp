@@ -58,6 +58,13 @@
     <string name="assistencia">Assistència</string>
     <string name="No_Participants">No Assistents</string>
     <string name="Bus_Participants">Llista Bus</string>
+    <string name="en_bus">En Bus?</string>
+    <string name="nom_del_event">Nom del Event</string>
+    <string name="descripci_de_l_event">Descripció de l\'event</string>
+    <string name="crea">CREA</string>
+    <string name="default_date">00/00/0000</string>
+    <string name="Default_hour">00:00</string>
+    <string name="bus">BUS</string>
 
 
 </resources>

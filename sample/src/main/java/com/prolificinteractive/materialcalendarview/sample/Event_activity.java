@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class Event_activity extends AppCompatActivity {
     private boolean admin ;//= false;
     public String No_ass, Si_ass, Bus, posi;
     private String mes2;
+    private boolean busnecessari;
 
 
     @Override
@@ -62,7 +64,11 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix = (CheckBox)findViewById(R.id.Si);
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
-        //TODO: arreglar la memoria de checks
+        if(!busnecessari){
+            TextView bus_text = (TextView) findViewById(R.id.bus_text);
+            bus_text.setVisibility(View.INVISIBLE);
+            Va_en_bus.setVisibility(View.INVISIBLE);
+        }
 
         mRootRef.child(String.valueOf(pos+1)).child("Assistents").addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,6 +131,7 @@ public class Event_activity extends AppCompatActivity {
         pos = getIntent().getExtras().getInt("pos");
         Hora = getIntent().getExtras().getString("hora");
         admin = getIntent().getExtras().getBoolean("admin");
+        busnecessari = getIntent().getExtras().getBoolean("busnecessari");
     }
 
     public void ChkSi(android.view.View view){

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -42,6 +43,7 @@ public class Edit_event_activity extends AppCompatActivity {
         showDate.setText(dia+"/"+mes2+"/"+año);
         final TimePicker selectHour = (TimePicker) findViewById(R.id.selectHour);
         final EditText desc = (EditText) findViewById(R.id.Descripcio);
+        final CheckBox Busnecessari = (CheckBox) findViewById(R.id.Busnecesari);
 
         create_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +58,7 @@ public class Edit_event_activity extends AppCompatActivity {
                 final String descrip = desc.getText().toString();
 
                 mRootRef.child(String.valueOf(año)).child(String.valueOf(mes)).child(String.valueOf(dia)).
-                        child(key).setValue(new Event(name,hour,descrip));
+                        child(key).setValue(new Event(name,hour,descrip,Busnecessari.isChecked()));
 
                 //mRootRef.child(String.valueOf(year)).child(String.valueOf(month)).child(String.valueOf(day)).child(key).setValue(name+' '+String.valueOf(hour)
                 Intent intent = new Intent(Edit_event_activity.this, BasicActivity.class);

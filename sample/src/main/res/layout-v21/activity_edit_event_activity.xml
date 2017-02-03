@@ -13,7 +13,7 @@
         android:orientation="vertical" >
 
         <EditText
-            android:hint="Nom del Event"
+            android:hint="@string/nom_del_event"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:textAlignment="center"
@@ -24,7 +24,7 @@
 
         <TimePicker
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
             android:id="@+id/selectHour"
             android:layout_weight="0.02"
             android:calendarViewShown="false"
@@ -36,6 +36,9 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/app_primary"
+            android:textStyle="bold"
+            android:background="#CCCCCC"
             android:ems="10"
             android:id="@+id/showDate"
             android:textSize="30sp"/>
@@ -46,15 +49,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="Descripció de l'event"
+            android:hint="@string/descripci_de_l_event"
             android:ems="10"
             android:id="@+id/Descripcio"
             android:textSize="25sp"/>
 
+        <CheckBox
+            android:text="@string/en_bus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:id="@+id/Busnecesari"/>
+
     </LinearLayout>
 
     <Button
-        android:text="CREA"
+        android:text="@string/crea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/create_btn"

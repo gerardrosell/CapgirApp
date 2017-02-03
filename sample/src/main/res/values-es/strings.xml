@@ -19,6 +19,7 @@
     <string name="assistencia">Asistencia</string>
     <string name="No_Participants">No Assistentes</string>
     <string name="Bus_Participants">Lista Bus</string>
+    <string name="en_bus">¿En Bus?</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

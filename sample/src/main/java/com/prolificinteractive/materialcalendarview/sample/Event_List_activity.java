@@ -29,6 +29,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public int participen = 0;
     public long NAct;
     public boolean admin;
+    public boolean busnec[];
     //public Object participants;
     //public long quantitatEvents;
     public long cont;
@@ -50,6 +51,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         //BuscarParticipants( NAct );
         nombreEvento = new String[1000];
         descripcions = new String[1000];
+        busnec = new boolean[1000];
         hores = new String[1000];
         posicion_lista = 0;
     }
@@ -65,6 +67,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("hora",hores[pos]);
         intent.putExtra("desc", descripcions[pos]);
         intent.putExtra("admin", admin);
+        intent.putExtra("busnecessari", busnec[pos]);
         startActivity(intent);
     }
 
@@ -86,8 +89,9 @@ public class Event_List_activity  extends AppCompatActivity  {
                         String[] sep = event.split("=");
                         int posnombre = 0;
                         int poshora = 0;
-                        int posAs = 0;
+                        int posAs;
                         int posDesc = 0;
+                        int posBus = 0;
 
                         for(int j = 0; j< sep.length; j++){
                             if (sep[j].contains("Name")){
@@ -100,9 +104,12 @@ public class Event_List_activity  extends AppCompatActivity  {
                                 posDesc = j+1;
                             }
                             if (sep[j].contains("Assistents")){
-                                for(posAs=j+1; !sep[posAs].contains("Description") && !sep[posAs].contains("Name") && !sep[posAs].contains("hour") && !sep[posAs].contains("Va En Bus") && !sep[posAs].contains("No_Assist") && posAs<sep.length-1 ;posAs++){
+                                for(posAs=j+1; !sep[posAs].contains("Description") && !sep[posAs].contains("busnecessari") && !sep[posAs].contains("Name") && !sep[posAs].contains("hour") && !sep[posAs].contains("Va En Bus") && !sep[posAs].contains("No_Assist") && posAs<sep.length-1 ;posAs++){
                                     participen++;
                                 }
+                            }
+                            if (sep[j].contains("busnecessari")){
+                                posBus = j+1;
                             }
                         }
                         pos = sep[posnombre].indexOf( "," );
@@ -111,6 +118,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                         hora = sep[poshora].substring(0,pos2);
                         posD = sep[posDesc].indexOf( "," );
                         Desc = sep[posDesc].substring( 0,posD );
+                        busnec[i] = sep[posBus].contains("true");
 
                         nombreEvento[i] = nom;
                         descripcions[i] = Desc;
