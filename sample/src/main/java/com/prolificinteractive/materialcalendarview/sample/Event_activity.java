@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class Event_activity extends AppCompatActivity {
     public String No_ass, Si_ass, Bus, posi;
     private String mes2;
     private boolean busnecessari;
+    private Button btn_acompanyants;
 
 
     @Override
@@ -64,6 +66,8 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix = (CheckBox)findViewById(R.id.Si);
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
+        btn_acompanyants = (Button) findViewById(R.id.btn_acompanyants);
+        btn_acompanyants.setVisibility(View.INVISIBLE);
         if(!busnecessari){
             TextView bus_text = (TextView) findViewById(R.id.bus_text);
             bus_text.setVisibility(View.INVISIBLE);
@@ -101,6 +105,8 @@ public class Event_activity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(id)){
                     Va_en_bus.setChecked(true);
+                    btn_acompanyants.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -140,6 +146,11 @@ public class Event_activity extends AppCompatActivity {
         Va_en_bus.setEnabled(true);
         No_assisteix.setEnabled(true);
         No_assisteix.setChecked(false);
+        if(Va_en_bus.isChecked()){
+            btn_acompanyants.setVisibility(View.VISIBLE);
+        } else {
+            btn_acompanyants.setVisibility(View.INVISIBLE);
+        }
     }
     public void ChkNo(android.view.View view){
         No_assisteix.setChecked(true);
@@ -147,6 +158,11 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix.setEnabled(true);
         Va_en_bus.setEnabled(false);
         Va_en_bus.setChecked(false);
+        if(Va_en_bus.isChecked()){
+            btn_acompanyants.setVisibility(View.VISIBLE);
+        } else {
+            btn_acompanyants.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void Bus(android.view.View view){
@@ -154,6 +170,11 @@ public class Event_activity extends AppCompatActivity {
         Si_assisteix.setChecked(true);
         Si_assisteix.setEnabled(true);
         No_assisteix.setEnabled(true);
+        if(Va_en_bus.isChecked()){
+            btn_acompanyants.setVisibility(View.VISIBLE);
+        } else {
+            btn_acompanyants.setVisibility(View.INVISIBLE);
+        }
 
     }
 
