@@ -17,20 +17,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Num_acompanyants extends AppCompatActivity {
 
-    private String año, mes, mes2, dia, nombreEvento;
+    private String año, mes, mes2, dia, nombre;
     private int pos;
     private DatabaseReference mRootRef;
     private TextView showDate;
     private Button guardar;
     private EditText num_acomp;
     private String id;
+    private String NmesA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_num_acompanyants);
         recogerExtras();
-        mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes2).child(dia).child(String.valueOf(pos)).child("Va En Bus Acompanyants");
+        mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes2).child(dia).child(String.valueOf(pos)).child("Va En Bus");
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         showDate = (TextView) findViewById(R.id.showDate);
         guardar = (Button) findViewById(R.id.guardar);
@@ -46,7 +47,10 @@ public class Num_acompanyants extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    num_acomp.setText(dataSnapshot.getValue().toString());
+                    NmesA=dataSnapshot.getValue().toString();
+                    //NmesA=NmesA.substring(0,NmesA.length()-1);
+                    String[] sep = NmesA.split(" - ");
+                    num_acomp.setText(sep[1]);
                 } else{
                     num_acomp.setText("0");
                 }
@@ -61,7 +65,11 @@ public class Num_acompanyants extends AppCompatActivity {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mRootRef.child(id).setValue(num_acomp.getText().toString());
+                String valor;
+                if(num_acomp.getText().toString()==null){
+                    valor="0";
+                } else{valor=num_acomp.getText().toString();}
+                mRootRef.child(id).setValue(nombre+" - " +valor);
                 Toast toast = Toast.makeText(Num_acompanyants.this, "Guardat", Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -75,6 +83,7 @@ public class Num_acompanyants extends AppCompatActivity {
         mes=String.valueOf(Integer.parseInt(mes)+1);
         dia = getIntent().getExtras().getString("dia");
         pos = getIntent().getExtras().getInt("pos");
+        nombre = getIntent().getExtras().getString("nombre");
         pos++;
     }
 }

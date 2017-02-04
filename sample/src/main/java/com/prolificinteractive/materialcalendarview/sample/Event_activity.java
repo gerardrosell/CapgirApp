@@ -33,7 +33,7 @@ public class Event_activity extends AppCompatActivity {
     private boolean admin ;//= false;
     public String No_ass, Si_ass, Bus, posi;
     private String mes2;
-    private boolean busnecessari;
+    private boolean busnecessari, apuntatBus;
     private Button btn_acompanyants;
 
 
@@ -126,6 +126,18 @@ public class Event_activity extends AppCompatActivity {
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
         hora.setText(Hora);
         descrip.setText(desc);
+        apuntatBus=false;
+        mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                apuntatBus=dataSnapshot.exists();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         }
     public void recogerExtras() {
         desc =getIntent().getExtras().getString("desc");
@@ -147,6 +159,7 @@ public class Event_activity extends AppCompatActivity {
         intent.putExtra("mes", mes);
         intent.putExtra("dia", dia);
         intent.putExtra("pos",pos);
+        intent.putExtra("nombre", nombre);
         startActivity(intent);
     }
 
@@ -204,10 +217,10 @@ public class Event_activity extends AppCompatActivity {
                 }else if (Si_ass.equals( "True" )){
                     mRootRef.child(posi).child("Assistents").child(id).setValue(nombre);
                     mRootRef.child(posi).child("No_Assist").child(id).removeValue();
-                    if (Bus.equals( "True" )){
-                        mRootRef.child(posi).child("Va En Bus").child(id).setValue(nombre);
+                    if (Bus.equals( "True" ) && !apuntatBus){
+                        mRootRef.child(posi).child("Va En Bus").child(id).setValue(nombre+" - 0");
                     }
-                    else{
+                    else if(Bus.equals( "False" )){
                         mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
                     }
                 }
