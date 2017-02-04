@@ -34,7 +34,6 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
@@ -47,7 +46,7 @@ public class BasicActivity extends AppCompatActivity
 
     public static int REQUEST_NAME_CALENDARI = 1;
     private DatabaseReference mRootRef, mRootRefUsu;
-    private DatabaseReference mRootRead, mRootReadUsu;
+    private DatabaseReference mRootRead;
     private DatabaseReference mRootRefAdmin;
     private Button button;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
@@ -57,9 +56,6 @@ public class BasicActivity extends AppCompatActivity
     public Object participants;
     //private Usuario Usuari;
     private boolean admin = false;
-    private Usuario usuari;
-    private int posicio, i;
-    private String admins[];
     private String id;
 
     @Bind(R.id.calendarView)
@@ -90,10 +86,6 @@ public class BasicActivity extends AppCompatActivity
         button = (Button)findViewById(R.id.button);
         //Usuari = new Usuario();
 
-        ArrayList<CalendarDay> mesActual;
-
-
-
 
         ButterKnife.bind(this);
         widget.setOnDateChangedListener(this);
@@ -122,6 +114,7 @@ public class BasicActivity extends AppCompatActivity
         widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
+                //new HighlightDaywithEventDecorator(),
                 //new EventDecorator(Color.RED, vector),
                 oneDayDecorator
         );
@@ -139,6 +132,64 @@ public class BasicActivity extends AppCompatActivity
         textView.setText(getSelectedDatesString());
         invalidateOptionsMenu();
     }
+
+    /*public void initializeCalendar(){
+        //calendarView = (CalendarView)findViewById(R.id.calendarview);
+        //calendarViewMaterial = (MaterialCalendarView) findViewById(R.id.calendarView);
+        final ArrayList<CalendarDay> list = new ArrayList<CalendarDay>();
+        final ArrayList<CalendarDay> listPast = new ArrayList<CalendarDay>();
+        mRootRef.child("laundryOrders").orderByChild("username_id").equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String orderDate;
+                    DateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+                    String delims = "[/]";
+                    //int year, month, date;
+                    orderDate = postSnapshot.child("takenDate").getValue(String.class).toString();
+                    Date date;
+                    Calendar cal = Calendar.getInstance();
+                    try{
+                        date = df.parse(orderDate);
+                        //Log.d("yearmonthdate",date.toString());
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        cal.setTime(sdf.parse(orderDate));// all done
+                    }catch(Exception e){
+
+                    }
+
+                    Calendar todayCal = Calendar.getInstance();
+                    CalendarDay calendarDay =CalendarDay.from(cal);
+
+                    if(cal.compareTo(todayCal)>0){
+                        list.add(calendarDay);
+                    }else{
+                        listPast.add(calendarDay);
+                    }
+
+                    //System.out.println(list.get(0));
+                    //Log.d("listofcal",list.toString());
+                    if(list.size()!=0){
+                        widget.addDecorator(new OrderDecorator(Color.RED, list));
+                    }
+                    if(listPast.size()!=0){
+                        widget.addDecorator(new OrderDecoratorPast(Color.RED, listPast));
+                    }
+
+                }
+                try{
+
+                }catch (Exception e){
+
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }*/
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
@@ -263,13 +314,7 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @Nullable CalendarDay date, boolean selected) {
-        /*
-        //Escriu a firebase el dia seleccionat en el format data 00/00/0000
-        String text = getSelectedDatesString();
-        textView.setText(text);
-        if(!text.isEmpty()){
-            mRootRef.child(text).setValue(text);
-        }*/
+
         DaySelected=true;
         String d="";
         if(date!=null) {
@@ -353,54 +398,4 @@ public class BasicActivity extends AppCompatActivity
     }
 
 
-
-
-
-    /*public String ConvertirObjectToString(Object model) {
-        String Str="";
-        if(model!=null){
-            Str = model.toString();
-        }
-        return Str;
-    }
-
-    public String TrobarAdmin (String id){
-        mRootReadUsu = mRootRefUsu.child( id );
-        mRootReadUsu.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                usuari = dataSnapshot.getValue(Usuario.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        admin = ConvertirObjectToString(usuari);
-        admin = admin.substring(0,admin.length()-1);
-        String[] separar = admin.split(",");
-        int posadmin = 0;
-        for(int j = 0; j< separar.length; j++) {
-            if (separar[j].contains( "admin" )) {
-                posadmin = j;
-            }
-        }
-        posicio = separar[posadmin].indexOf( "=" );
-        admin2 = separar[posadmin].substring( posicio+1);
-        mRootRefUsu.child( id ).child( admin2 ).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                admin3 = dataSnapshot.getValue(boolean.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        return String.valueOf(admin3);
-
-    }*/
 }
