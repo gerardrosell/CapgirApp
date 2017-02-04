@@ -21,6 +21,9 @@
     <string name="Bus_Participants">Bus List</string>
     <string name="en_bus">¿With Bus?</string>
     <string name="guardar">Save</string>
+    <string name="quants_acompanyants_venen_en_bus">Quants acompanyants venen en BUS?</string>
+    <string name="enviar_llistes">Send lists</string>
+    <string name="envia_la_llista">Send list</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

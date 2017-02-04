@@ -1,10 +1,13 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -16,6 +19,10 @@ public class NoParticipantsListActivity extends AppCompatActivity {
     private DatabaseReference mRootRef;
     public int pos;
     private RecyclerView mRecyclerView;
+    private String llista="No assistents:\n";
+    private String mes2;
+    private TextView titol;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +34,13 @@ public class NoParticipantsListActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        titol=(TextView) findViewById(R.id.titol);
     }
     @Override
     protected void onStart(){
 
         super.onStart();
+        titol.setText(R.string.No_Participants);
         FirebaseRecyclerAdapter<String, MessageViewHolder> adapter =
             new FirebaseRecyclerAdapter<String, MessageViewHolder>(String.class,
             R.layout.activity_participants_item_list,
@@ -39,6 +48,7 @@ public class NoParticipantsListActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, String model, int position) {
                 viewHolder.participant.setText(model);
+                llista+=model+"\n";
             }
         };
      mRecyclerView.setAdapter(adapter);
@@ -51,9 +61,18 @@ public class NoParticipantsListActivity extends AppCompatActivity {
             participant = (TextView) view.findViewById(R.id.nomParticipant);
         }
     }
+
+    public void send_list(View view) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:" + "capgiratapp@gmail.com"));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Llista de no assistents - "+nombreEvento+" - "+dia+"/"+mes2+"/"+año);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, llista);
+        startActivity(emailIntent);
+    }
     public void recogerExtras() {
         año = getIntent().getExtras().getString("año");
         mes = getIntent().getExtras().getString("mes");
+        mes2=mes;
         mes=String.valueOf(Integer.parseInt(mes)-1);
         dia = getIntent().getExtras().getString("dia");
         nombreEvento = getIntent().getExtras().getString("nombre");

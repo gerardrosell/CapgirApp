@@ -3,7 +3,7 @@
     android:exitFadeDuration="@android:integer/config_shortAnimTime">
 
     <item android:state_checked="true"
-        android:drawable="@color/app_primary" />
+        android:drawable="@drawable/round" />
 
     <item android:state_pressed="true"
         android:drawable="@color/app_primary" />

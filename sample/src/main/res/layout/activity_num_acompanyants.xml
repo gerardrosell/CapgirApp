@@ -32,7 +32,7 @@
         android:background="#CCCCCC"
         android:id="@+id/info"
         android:layout_below="@id/showDate"
-        android:text="Quants acompanyants venen en BUS?"
+        android:text="@string/quants_acompanyants_venen_en_bus"
         android:textSize="35sp"/>
 
     <EditText

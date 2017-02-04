@@ -2,10 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Button
+        android:text="@string/envia_la_llista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Calendari"
+        android:onClick="send_list"
+        android:background="@color/app_primary"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        />
+    <TextView
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/app_primary"
+        android:textStyle="bold"
+        android:background="#CCCCCC"
+        android:id="@+id/titol"
+        android:textSize="30sp"/>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:layout_alignParentTop="true" />
+        android:id="@+id/recyclerView" />
 
 </LinearLayout>

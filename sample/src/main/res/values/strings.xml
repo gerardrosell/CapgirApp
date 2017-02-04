@@ -68,6 +68,10 @@
     <string name="more">+</string>
     <string name="guardar">Guardar</string>
     <string name="mes">+</string>
+    <string name="quants_acompanyants_venen_en_bus">Quants acompanyants venen en BUS?</string>
+    <string name="enviar_llistes">Enviar llistes</string>
+    <string name="envia_la_llista">Envia la llista</string>
+    <string name="NoAssistList">Llista No Assistents</string>
 
 
 </resources>
