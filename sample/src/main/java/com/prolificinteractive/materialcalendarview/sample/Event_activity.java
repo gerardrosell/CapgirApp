@@ -140,6 +140,16 @@ public class Event_activity extends AppCompatActivity {
         busnecessari = getIntent().getExtras().getBoolean("busnecessari");
     }
 
+    public void num_acompanyants(android.view.View view){
+        Intent intent = new Intent(this, Num_acompanyants.class);
+        /*Envio de parámetros a otra actividad*/
+        intent.putExtra("año", año);
+        intent.putExtra("mes", mes);
+        intent.putExtra("dia", dia);
+        intent.putExtra("pos",pos);
+        startActivity(intent);
+    }
+
     public void ChkSi(android.view.View view){
         No_assisteix.setChecked(false);
         Si_assisteix.setChecked(true);
@@ -280,29 +290,5 @@ public class Event_activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    /*private void Admin(final String id){
-        mRootRefAdmin.addValueEventListener( new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(id)) {
-                    admin = true;
-                    //textView.setText(String.valueOf(admin));
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        } );
-    }*/
-    /*@Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
 }

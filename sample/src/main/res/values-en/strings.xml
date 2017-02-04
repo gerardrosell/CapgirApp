@@ -20,6 +20,7 @@
     <string name="No_Participants">No Assistents</string>
     <string name="Bus_Participants">Bus List</string>
     <string name="en_bus">¿With Bus?</string>
+    <string name="guardar">Save</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

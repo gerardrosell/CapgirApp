@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_num_acompanyants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.prolificinteractive.materialcalendarview.sample.Num_acompanyants">
+
+    <TextView
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/app_primary"
+        android:textStyle="bold"
+        android:background="#CCCCCC"
+        android:id="@+id/showDate"
+        android:text="00/00/0000"
+        android:textSize="50sp"/>
+
+    <TextView
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/app_primary"
+        android:textStyle="bold"
+        android:background="#CCCCCC"
+        android:id="@+id/info"
+        android:layout_below="@id/showDate"
+        android:text="Quants acompanyants venen en BUS?"
+        android:textSize="35sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/num_acomp"
+        android:hint="NUM"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:layout_below="@+id/info"
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"/>
+
+    <Button
+        android:text="@string/guardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/guardar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/app_primary"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
+
+</RelativeLayout>
