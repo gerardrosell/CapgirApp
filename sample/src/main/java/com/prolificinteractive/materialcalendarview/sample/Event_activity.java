@@ -245,7 +245,7 @@ public class Event_activity extends AppCompatActivity {
         if (id == R.id.goParticipants_btn) {
             Intent intent = new Intent(this, ParticipantsListActivity.class);
             intent.putExtra("año", año);
-            intent.putExtra("mes", mes+1);
+            intent.putExtra("mes", String.valueOf(Integer.parseInt(mes)+1));
             intent.putExtra("dia", dia);
             intent.putExtra("nombre",nombreEvento);
             intent.putExtra("pos",pos);
@@ -255,7 +255,7 @@ public class Event_activity extends AppCompatActivity {
         if (id == R.id.goNoParticipants_btn) {
             Intent intent = new Intent(this, NoParticipantsListActivity.class);
             intent.putExtra("año", año);
-            intent.putExtra("mes", mes+1);
+            intent.putExtra("mes", String.valueOf(Integer.parseInt(mes)+1));
             intent.putExtra("dia", dia);
             intent.putExtra("nombre",nombreEvento);
             intent.putExtra("pos",pos);
@@ -266,7 +266,7 @@ public class Event_activity extends AppCompatActivity {
         if (id == R.id.goBus_btn) {
             if(busnecessari){Intent intent = new Intent(this, BusParticipantsListActivity.class);
             intent.putExtra("año", año);
-            intent.putExtra("mes", mes+1);
+            intent.putExtra("mes", String.valueOf(Integer.parseInt(mes)+1));
             intent.putExtra("dia", dia);
             intent.putExtra("nombre",nombreEvento);
             intent.putExtra("pos",pos);
