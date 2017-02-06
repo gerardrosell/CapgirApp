@@ -22,9 +22,6 @@ public class HighlightDaywithEventDecorator implements DayViewDecorator {
     private final Calendar calendar = Calendar.getInstance();
     private DatabaseReference mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
     private boolean resultat;
-    private int dia;
-    private int any;
-    private int mes;
     //private final Drawable highlightDrawable;
     //private static final int color = Color.parseColor("#DDDDDD");
 
@@ -33,17 +30,13 @@ public class HighlightDaywithEventDecorator implements DayViewDecorator {
     @Override
     public boolean shouldDecorate(CalendarDay day) {
         day.copyTo(calendar);
-        any=day.getYear();
-        mes=day.getMonth();
-        dia=day.getDay();
+        int any = day.getYear();
+        int mes = day.getMonth();
+        int dia = day.getDay();
         mRootRef.child(String.valueOf(any)).child(String.valueOf(mes)).child(String.valueOf(dia)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChildren()){
-                    resultat=true;
-                } else{
-                    resultat=false;
-                }
+                resultat = dataSnapshot.hasChildren();
             }
 
             @Override
@@ -52,7 +45,7 @@ public class HighlightDaywithEventDecorator implements DayViewDecorator {
             }
         });
         /*int weekDay = calendar.get(Calendar.DAY_OF_WEEK);*/
-        return resultat;
+        return resultat; //true;
     }
 
     @Override

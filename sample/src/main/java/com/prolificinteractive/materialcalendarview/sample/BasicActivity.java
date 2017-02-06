@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.sample.decorators.HighlightDaywithEventDecorator;
 import com.prolificinteractive.materialcalendarview.sample.decorators.HighlightWeekendsDecorator;
 import com.prolificinteractive.materialcalendarview.sample.decorators.MySelectorDecorator;
 import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDecorator;
@@ -114,7 +115,7 @@ public class BasicActivity extends AppCompatActivity
         widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
-                //new HighlightDaywithEventDecorator(),
+                new HighlightDaywithEventDecorator(),
                 //new EventDecorator(Color.RED, vector),
                 oneDayDecorator
         );
