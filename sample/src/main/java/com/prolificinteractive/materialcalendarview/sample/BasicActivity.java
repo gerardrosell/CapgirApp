@@ -35,6 +35,7 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
@@ -65,7 +66,7 @@ public class BasicActivity extends AppCompatActivity
     @Bind(R.id.textView)
     TextView textView;
     private boolean DaySelected=false;
-    private Collection<CalendarDay> vector;
+    private ArrayList<CalendarDay> dates = new ArrayList<CalendarDay>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +113,26 @@ public class BasicActivity extends AppCompatActivity
             //});
         }*/
 
+        /*int any = day.getYear();
+        int mes = day.getMonth();
+        int dia = day.getDay();
+        mRootRef.child(String.valueOf(any)).child(String.valueOf(mes)).child(String.valueOf(dia)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                resultat = dataSnapshot.hasChildren();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+        dates.add(CalendarDay.today());
+
         widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
-                new HighlightDaywithEventDecorator(),
+                new HighlightDaywithEventDecorator(dates),
                 //new EventDecorator(Color.RED, vector),
                 oneDayDecorator
         );
