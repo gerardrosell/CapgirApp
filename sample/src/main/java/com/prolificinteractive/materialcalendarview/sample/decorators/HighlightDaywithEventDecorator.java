@@ -29,6 +29,8 @@ public class HighlightDaywithEventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(5, Color.RED));
+        view.addSpan(new DotSpan(55, Color.parseColor("#db6163")));
+        //view.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#db6163")));
+
     }
 }
