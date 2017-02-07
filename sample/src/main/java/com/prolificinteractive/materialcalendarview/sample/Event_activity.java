@@ -153,6 +153,7 @@ public class Event_activity extends AppCompatActivity {
     }
 
     public void num_acompanyants(android.view.View view){
+        ck(view);
         Intent intent = new Intent(this, Num_acompanyants.class);
         /*Envio de parámetros a otra actividad*/
         intent.putExtra("año", año);

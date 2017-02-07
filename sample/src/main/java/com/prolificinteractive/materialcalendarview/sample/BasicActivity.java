@@ -72,9 +72,9 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mRootRef= FirebaseDatabase.getInstance().getReference().child("Evento");
-        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
-        mRootRefAdmin= FirebaseDatabase.getInstance().getReference().child("Admin");
+        mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento");
+        mRootRefUsu = FirebaseDatabase.getInstance().getReference().child("Users");
+        mRootRefAdmin = FirebaseDatabase.getInstance().getReference().child("Admin");
         id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
         Registre(id);
         Admin(id);
@@ -87,7 +87,7 @@ public class BasicActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        button = (Button)findViewById(R.id.button);
+        button = (Button) findViewById(R.id.button);
         //Usuari = new Usuario();
 
 
@@ -95,29 +95,32 @@ public class BasicActivity extends AppCompatActivity
         widget.setOnDateChangedListener(this);
 
 
-        final int mesAct = CalendarDay.today().getMonth();
+        //final int mesAct = CalendarDay.today().getMonth();
         final int anyAct = CalendarDay.today().getYear();
 
-        mRootIt=mRootRef.child(String.valueOf(anyAct)).child(String.valueOf(mesAct));
+
         //int a = mRootIt.hashCode();
-
-        mRootIt.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                dates = new ArrayList<CalendarDay>();
-                for(int k = 1;k<31; k++){
-                    if(dataSnapshot.hasChild(String.valueOf(k))){
-                        dates.add(CalendarDay.from(anyAct, mesAct, k));
+        for (int mesAct = 0; mesAct < 12; mesAct++){
+            mRootIt = mRootRef.child(String.valueOf(anyAct)).child(String.valueOf(mesAct));
+            final int finalMesAct = mesAct;
+            mRootIt.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    dates = new ArrayList<CalendarDay>();
+                    for (int k = 1; k < 31; k++) {
+                        if (dataSnapshot.hasChild(String.valueOf(k))) {
+                            dates.add(CalendarDay.from(anyAct, finalMesAct, k));
+                        }
                     }
+                    widget.addDecorator(new HighlightDaywithEventDecorator(dates));
                 }
-                widget.addDecorator(new HighlightDaywithEventDecorator(dates));
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+    }
 
 
 
