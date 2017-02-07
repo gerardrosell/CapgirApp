@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +37,6 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -66,7 +66,9 @@ public class BasicActivity extends AppCompatActivity
     @Bind(R.id.textView)
     TextView textView;
     private boolean DaySelected=false;
-    private ArrayList<CalendarDay> dates = new ArrayList<CalendarDay>();
+    private ArrayList<CalendarDay> dates;
+    private DatabaseReference mRootIt;
+    private String event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,46 +95,35 @@ public class BasicActivity extends AppCompatActivity
         widget.setOnDateChangedListener(this);
 
 
-        //final int mesAct = CalendarDay.today().getMonth();
-        //final int anyAct = CalendarDay.today().getYear();
+        final int mesAct = CalendarDay.today().getMonth();
+        final int anyAct = CalendarDay.today().getYear();
 
-        /*for(int k = 1;k<31; k++){
-            final int finalK = k;
-            //mRootRef.child(String.valueOf(anyAct)).child(String.valueOf(mesAct)).child(String.valueOf(k)).addValueEventListener(new ValueEventListener() {
-            //    @Override
-            //    public void onDataChange(DataSnapshot dataSnapshot) {
-                    //if(dataSnapshot.hasChild("1")){
-                        vector.add(CalendarDay.from(anyAct,mesAct,finalK));
-                    //}
-            //    }
+        mRootIt=mRootRef.child(String.valueOf(anyAct)).child(String.valueOf(mesAct));
+        //int a = mRootIt.hashCode();
 
-            //    @Override
-            //    public void onCancelled(DatabaseError databaseError) {
-
-            //    }
-            //});
-        }*/
-
-        /*int any = day.getYear();
-        int mes = day.getMonth();
-        int dia = day.getDay();
-        mRootRef.child(String.valueOf(any)).child(String.valueOf(mes)).child(String.valueOf(dia)).addValueEventListener(new ValueEventListener() {
+        mRootIt.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                resultat = dataSnapshot.hasChildren();
+                dates = new ArrayList<CalendarDay>();
+                for(int k = 1;k<31; k++){
+                    if(dataSnapshot.hasChild(String.valueOf(k))){
+                        dates.add(CalendarDay.from(anyAct, mesAct, k));
+                    }
+                }
+                widget.addDecorator(new HighlightDaywithEventDecorator(dates));
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
-        dates.add(CalendarDay.today());
+        });
+
+
 
         widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
-                new HighlightDaywithEventDecorator(dates),
                 //new EventDecorator(Color.RED, vector),
                 oneDayDecorator
         );
@@ -150,64 +141,6 @@ public class BasicActivity extends AppCompatActivity
         textView.setText(getSelectedDatesString());
         invalidateOptionsMenu();
     }
-
-    /*public void initializeCalendar(){
-        //calendarView = (CalendarView)findViewById(R.id.calendarview);
-        //calendarViewMaterial = (MaterialCalendarView) findViewById(R.id.calendarView);
-        final ArrayList<CalendarDay> list = new ArrayList<CalendarDay>();
-        final ArrayList<CalendarDay> listPast = new ArrayList<CalendarDay>();
-        mRootRef.child("laundryOrders").orderByChild("username_id").equalTo(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String orderDate;
-                    DateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-                    String delims = "[/]";
-                    //int year, month, date;
-                    orderDate = postSnapshot.child("takenDate").getValue(String.class).toString();
-                    Date date;
-                    Calendar cal = Calendar.getInstance();
-                    try{
-                        date = df.parse(orderDate);
-                        //Log.d("yearmonthdate",date.toString());
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                        cal.setTime(sdf.parse(orderDate));// all done
-                    }catch(Exception e){
-
-                    }
-
-                    Calendar todayCal = Calendar.getInstance();
-                    CalendarDay calendarDay =CalendarDay.from(cal);
-
-                    if(cal.compareTo(todayCal)>0){
-                        list.add(calendarDay);
-                    }else{
-                        listPast.add(calendarDay);
-                    }
-
-                    //System.out.println(list.get(0));
-                    //Log.d("listofcal",list.toString());
-                    if(list.size()!=0){
-                        widget.addDecorator(new OrderDecorator(Color.RED, list));
-                    }
-                    if(listPast.size()!=0){
-                        widget.addDecorator(new OrderDecoratorPast(Color.RED, listPast));
-                    }
-
-                }
-                try{
-
-                }catch (Exception e){
-
-                }
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }*/
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
