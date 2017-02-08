@@ -314,6 +314,16 @@ public class Event_activity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.tancallista_btn) {
+            mRootRef.child(String.valueOf(pos+1)).child("llistatancada").setValue("true");
+            return true;
+        }
+
+        if (id == R.id.obrellista_btn) {
+            mRootRef.child(String.valueOf(pos+1)).child("llistatancada").setValue("false");
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

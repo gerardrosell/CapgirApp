@@ -7,5 +7,9 @@
         android:id="@+id/goNoParticipants_btn" />
     <item android:title="@string/Bus_Participants"
         android:id="@+id/goBus_btn" />
+    <item android:title="@string/tanca_llista"
+        android:id="@+id/tancallista_btn" />
+    <item android:title="@string/obre_llista"
+        android:id="@+id/obrellista_btn" />
 
 </menu>

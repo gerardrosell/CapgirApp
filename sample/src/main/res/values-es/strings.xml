@@ -28,6 +28,8 @@
     <string name="registre_m_ltiple_en_aquest_dispositiu">¿Registro múltiplo en éste dispositivo?</string>
     <string name="afegeix">Añadir</string>
     <string name="dades_inc">Datos incompletos</string>
+    <string name="tanca_llista">Cierra Lista</string>
+    <string name="obre_llista">Abre Lista</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

@@ -76,6 +76,8 @@
     <string name="registre_m_ltiple_en_aquest_dispositiu">Registre Múltiple en aquest dispositiu?</string>
     <string name="afegeix">Afegeix</string>
     <string name="dades_inc">Dades incompletes</string>
+    <string name="tanca_llista">Tanca Llista</string>
+    <string name="obre_llista">Obre Llista</string>
 
 
 </resources>
