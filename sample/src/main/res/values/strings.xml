@@ -47,7 +47,7 @@
     <string name="logocolla" translatable="false">LogoColla</string>
     <string name="crea_event">Crea Event</string>
     <string name="data_de_naixement">Data de naixement</string>
-    <string name="nom">Nom</string>
+    <string name="nom">Nom/Identificador</string>
     <string name="n_mero_de_tel_fon">Número de telèfon</string>
     <string name="e_mail" translatable="false">e-mail</string>
     <string name="registra_m">Registra\'m</string>
@@ -72,6 +72,10 @@
     <string name="enviar_llistes">Enviar llistes</string>
     <string name="envia_la_llista">Envia la llista</string>
     <string name="NoAssistList">Llista No Assistents</string>
+    <string name="registra_fam_lia">Registra Família</string>
+    <string name="registre_m_ltiple_en_aquest_dispositiu">Registre Múltiple en aquest dispositiu?</string>
+    <string name="afegeix">Afegeix</string>
+    <string name="dades_inc">Dades incompletes</string>
 
 
 </resources>

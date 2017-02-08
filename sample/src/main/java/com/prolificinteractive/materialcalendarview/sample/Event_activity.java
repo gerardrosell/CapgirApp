@@ -244,7 +244,6 @@ public class Event_activity extends AppCompatActivity {
             }
         });
         Toast toast = Toast.makeText(this, "Guardat", Toast.LENGTH_LONG);
-
         toast.show();
     }
 

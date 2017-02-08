@@ -24,6 +24,10 @@
     <string name="quants_acompanyants_venen_en_bus">Quants acompanyants venen en BUS?</string>
     <string name="enviar_llistes">Enviar llistes</string>
     <string name="envia_la_llista">Envia la llista</string>
+    <string name="registra_fam_lia">Registra Família</string>
+    <string name="registre_m_ltiple_en_aquest_dispositiu">Registre múltiple en aquest dispositiu?</string>
+    <string name="afegeix">Afegeix</string>
+    <string name="dades_inc">Dades incompletes</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

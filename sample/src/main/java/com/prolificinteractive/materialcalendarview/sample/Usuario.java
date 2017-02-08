@@ -1,5 +1,7 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
+import java.util.ArrayList;
+
 /**
  * Created by mmontonv on 18/12/2016.
  */
@@ -8,18 +10,14 @@ package com.prolificinteractive.materialcalendarview.sample;
 public class Usuario {
     public String nombre;
     public String email;
-    public boolean socio;
-    //public boolean admin;
-    public String fechaNacimiento;
     public String telefono;
+    public ArrayList<String> listItems;
 
-    public Usuario(String nom, String email, String FNaix, String NumTel){
+    public Usuario(String nom, String email, String NumTel, ArrayList<String> listI){
         this.nombre = nom;
         this.email = email;
-        this.socio = false;
-        //this.admin = true;
-        this.fechaNacimiento = FNaix;
         this.telefono = NumTel;
+        this.listItems=listI;
 
     }
 

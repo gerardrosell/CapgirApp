@@ -72,6 +72,7 @@ public class Num_acompanyants extends AppCompatActivity {
                 mRootRef.child(id).setValue(nombre+" - " +valor);
                 Toast toast = Toast.makeText(Num_acompanyants.this, "Guardat", Toast.LENGTH_LONG);
                 toast.show();
+                onBackPressed();
             }
         });
     }

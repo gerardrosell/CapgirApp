@@ -5,16 +5,24 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class RegistreActivity extends AppCompatActivity {
 
     private DatabaseReference mRootRefUsu;
+    private ArrayList<String> listUsu=new ArrayList<String>();
+    private ArrayAdapter<String> adapter;
+    private EditText nouNom;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +33,12 @@ public class RegistreActivity extends AppCompatActivity {
         final EditText Nom = (EditText) findViewById(R.id.Nom);
         final EditText Email = (EditText) findViewById(R.id.email);
         final EditText telefon = (EditText) findViewById(R.id.telefon);
-        final DatePicker selectDayNaix = (DatePicker) findViewById(R.id.selectDayNaix);
+        list = (ListView) findViewById(R.id.UserDeviceList);
+        adapter= new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_activated_1,
+                listUsu);
+        nouNom = (EditText) findViewById(R.id.nouNom);
+        list.setAdapter(adapter);
 
 
         Intent myIntent = getIntent(); // gets the previously created intent
@@ -35,17 +48,25 @@ public class RegistreActivity extends AppCompatActivity {
         registram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int day = selectDayNaix.getDayOfMonth();
-                final int month = selectDayNaix.getMonth();
-                final int year = selectDayNaix.getYear();
-                mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
-                mRootRefUsu.child(id).setValue(new Usuario(Nom.getText().toString(),
-                        Email.getText().toString(), String.valueOf( day )
-                        +"/"+String.valueOf( month+1 )+ "/" +String.valueOf( year ), telefon.getText().toString()));
-                startActivity(i);
+                if(Nom.getText().toString().equals("") || Email.getText().toString().equals("") || telefon.getText().toString().equals("")){
+                    Toast toast = Toast.makeText(RegistreActivity.this, R.string.dades_inc, Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
+                    mRootRefUsu.child(id).setValue(new Usuario(Nom.getText().toString(),
+                            Email.getText().toString(), telefon.getText().toString(),listUsu));
+                    startActivity(i);
+                }
+
             }
         });
+    }
 
+
+    public void AddItem(View view) {
+        listUsu.add(nouNom.getText().toString());
+        adapter.notifyDataSetChanged();
+        nouNom.setText("");
 
     }
 }
