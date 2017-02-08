@@ -35,6 +35,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     public long cont;
     private String[] descripcions, hores;
     private boolean soci;
+    private boolean llistatancada[];
 
 
     @Override
@@ -54,6 +55,8 @@ public class Event_List_activity  extends AppCompatActivity  {
         descripcions = new String[1000];
         busnec = new boolean[1000];
         hores = new String[1000];
+        llistatancada = new boolean[1000];
+
         posicion_lista = 0;
     }
 
@@ -70,6 +73,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("admin", admin);
         intent.putExtra("soci", soci);
         intent.putExtra("busnecessari", busnec[pos]);
+        intent.putExtra("llistatancada", llistatancada[pos]);
         startActivity(intent);
     }
 
@@ -94,6 +98,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                         int posAs;
                         int posDesc = 0;
                         int posBus = 0;
+                        int posLlT = 0;
 
                         for(int j = 0; j< sep.length; j++){
                             if (sep[j].contains("Name")){
@@ -113,6 +118,9 @@ public class Event_List_activity  extends AppCompatActivity  {
                             if (sep[j].contains("busnecessari")){
                                 posBus = j+1;
                             }
+                            if (sep[j].contains("llistatancada")){
+                                posLlT = j+1;
+                            }
                         }
                         pos = sep[posnombre].indexOf( "," );
                         nom = sep[posnombre].substring(0,pos);
@@ -121,6 +129,7 @@ public class Event_List_activity  extends AppCompatActivity  {
                         posD = sep[posDesc].indexOf( "," );
                         Desc = sep[posDesc].substring( 0,posD );
                         busnec[i] = sep[posBus].contains("true");
+                        llistatancada[i] = sep[posLlT].contains("true");
 
                         nombreEvento[i] = nom;
                         descripcions[i] = Desc;

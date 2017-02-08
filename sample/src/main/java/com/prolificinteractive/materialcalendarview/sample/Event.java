@@ -9,6 +9,7 @@ public class Event {
     public String hour;
     public String Description;
     public boolean busnecessari;
+    public boolean llistatancada;
 
 
     public Event(String N, String h, String Des, boolean BN) {
@@ -16,6 +17,7 @@ public class Event {
         this.hour=h;
         this.Description=Des;
         this.busnecessari=BN;
+        this.llistatancada=false;
     }
 }
 

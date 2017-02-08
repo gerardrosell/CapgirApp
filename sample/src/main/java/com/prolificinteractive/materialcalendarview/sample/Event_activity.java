@@ -36,6 +36,7 @@ public class Event_activity extends AppCompatActivity {
     private boolean busnecessari, apuntatBus;
     private Button btn_acompanyants;
     private boolean soci;
+    private boolean llistatancada;
 
 
     @Override
@@ -74,7 +75,7 @@ public class Event_activity extends AppCompatActivity {
             bus_text.setVisibility(View.INVISIBLE);
             Va_en_bus.setVisibility(View.INVISIBLE);
         }
-        if(!soci){
+        if(!soci || llistatancada){
             TextView Assist_text = (TextView) findViewById(R.id.Assist_text);
             Assist_text.setVisibility(View.INVISIBLE);
             Si_assisteix.setVisibility(View.INVISIBLE);
@@ -113,7 +114,7 @@ public class Event_activity extends AppCompatActivity {
         mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(id)){
+                if(dataSnapshot.hasChild(id) && !llistatancada){
                     Va_en_bus.setChecked(true);
                     btn_acompanyants.setVisibility(View.VISIBLE);
 
@@ -161,6 +162,7 @@ public class Event_activity extends AppCompatActivity {
         admin = getIntent().getExtras().getBoolean("admin");
         soci = getIntent().getExtras().getBoolean("soci");
         busnecessari = getIntent().getExtras().getBoolean("busnecessari");
+        llistatancada = getIntent().getExtras().getBoolean("llistatancada");
     }
 
     public void num_acompanyants(android.view.View view){
