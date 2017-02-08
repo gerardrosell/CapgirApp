@@ -34,6 +34,7 @@ public class Event_List_activity  extends AppCompatActivity  {
     //public long quantitatEvents;
     public long cont;
     private String[] descripcions, hores;
+    private boolean soci;
 
 
     @Override
@@ -67,6 +68,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("hora",hores[pos]);
         intent.putExtra("desc", descripcions[pos]);
         intent.putExtra("admin", admin);
+        intent.putExtra("soci", soci);
         intent.putExtra("busnecessari", busnec[pos]);
         startActivity(intent);
     }
@@ -164,6 +166,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         dia = getIntent().getExtras().getString("dia");
         NAct = getIntent().getExtras().getLong("cont");
         admin = getIntent().getExtras().getBoolean("admin");
+        soci = getIntent().getExtras().getBoolean("soci");
     }
 
     public String ConvertirObjectToString(Object model) {

@@ -50,9 +50,19 @@ public class Edit_event_activity extends AppCompatActivity {
             public void onClick(View view) {
                 final String hour;
                 if (Build.VERSION.SDK_INT < 23) {
-                    hour = String.valueOf(selectHour.getCurrentHour())+":"+String.valueOf(selectHour.getCurrentMinute());
+                    Integer min = selectHour.getCurrentMinute();
+                    if(min==0){
+                        hour = String.valueOf(selectHour.getCurrentHour())+":00";
+                    } else{
+                        hour = String.valueOf(selectHour.getCurrentHour())+":"+String.valueOf(min);
+                    }
                 } else {
-                    hour = String.valueOf(selectHour.getHour())+":"+String.valueOf(selectHour.getMinute());
+                    Integer min = selectHour.getMinute();
+                    if(min==0){
+                        hour = String.valueOf(selectHour.getHour())+":00";
+                    } else{
+                        hour = String.valueOf(selectHour.getHour())+":"+String.valueOf(min);
+                    }
                 }
                 final String name = nom_event.getText().toString();
                 final String descrip = desc.getText().toString();

@@ -49,7 +49,7 @@ public class BasicActivity extends AppCompatActivity
     public static int REQUEST_NAME_CALENDARI = 1;
     private DatabaseReference mRootRef, mRootRefUsu;
     private DatabaseReference mRootRead;
-    private DatabaseReference mRootRefAdmin;
+    private DatabaseReference mRootRefAdmin, mRootRefSoci;
     private Button button;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
@@ -69,15 +69,18 @@ public class BasicActivity extends AppCompatActivity
     private ArrayList<CalendarDay> dates;
     private DatabaseReference mRootIt;
     private String event;
+    private boolean soci=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento");
         mRootRefUsu = FirebaseDatabase.getInstance().getReference().child("Users");
         mRootRefAdmin = FirebaseDatabase.getInstance().getReference().child("Admin");
+        mRootRefSoci = FirebaseDatabase.getInstance().getReference().child("Soci");
         id = Secure.getString(getBaseContext().getContentResolver(), Secure.ANDROID_ID);
         Registre(id);
         Admin(id);
+        Soci(id);
         //findViewById(R.id.goEditEvent_btn).setEnabled( false );
         super.onCreate(savedInstanceState);
 
@@ -214,12 +217,6 @@ public class BasicActivity extends AppCompatActivity
         return true;
     }
 
-
-    private void goEditEvent() {
-        Intent intent = new Intent(this, Edit_event_activity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -258,9 +255,7 @@ public class BasicActivity extends AppCompatActivity
             intent.putExtra("dia", dia);
             intent.putExtra( "cont", cont );
             intent.putExtra("admin",admin);
-
-
-
+            intent.putExtra("soci", soci);
             startActivity(intent);
             //if fecha esta vacía, que ponga el current date
         }
@@ -349,6 +344,24 @@ public class BasicActivity extends AppCompatActivity
 
             }
         } );
+    }
+
+    private void Soci(final String id) {
+        mRootRefSoci.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(id)) {
+                    soci = true;
+                    //textView.setText(String.valueOf(admin));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        } );
+
     }
 
 

@@ -132,7 +132,7 @@
                 android:textSize="30sp"
                 android:gravity="end"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8"
+                android:id="@+id/Assist_text"
                 android:layout_weight="2"/>
 
             <View
