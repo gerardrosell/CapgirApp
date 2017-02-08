@@ -76,6 +76,8 @@ public class Event_activity extends AppCompatActivity {
             Va_en_bus.setVisibility(View.INVISIBLE);
         }
         if(!soci || llistatancada){
+            Button Apuntat = (Button) findViewById(R.id.apuntat);
+            Apuntat.setEnabled(false);
             TextView Assist_text = (TextView) findViewById(R.id.Assist_text);
             Assist_text.setVisibility(View.INVISIBLE);
             Si_assisteix.setVisibility(View.INVISIBLE);
