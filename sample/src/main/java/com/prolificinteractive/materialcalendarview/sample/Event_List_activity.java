@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Arrays;
+
 public class Event_List_activity  extends AppCompatActivity  {
 
     private DatabaseReference mRootRef, mRootRead;
@@ -42,7 +44,9 @@ public class Event_List_activity  extends AppCompatActivity  {
     private boolean llistatancada[];
     private String id;
     private DatabaseReference mRootRefUsu;
-    private String[] Usuaris_vinculats;
+    private String[] Usuaris_vinculats, Usuaris_vinculats_aux;
+    private boolean multipleusuari=false;
+    private String nomUsuari;
 
 
     @Override
@@ -53,20 +57,23 @@ public class Event_List_activity  extends AppCompatActivity  {
         Firebase.setAndroidContext(this);
         recogerExtras();
         participants = new String[1000];
-        Usuaris_vinculats = new String[1000];
+        Usuaris_vinculats_aux = new String[100];
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         mRootRefUsu.child(id).child("listUsu").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for(int posAs=0;  posAs<dataSnapshot.getChildrenCount() ;posAs++){
-                            Usuaris_vinculats[posAs]=dataSnapshot.child(String.valueOf(posAs)).getValue().toString();
+                if (dataSnapshot.exists()) {
+                    int posAs;
+                    for (posAs = 0; posAs < dataSnapshot.getChildrenCount(); posAs++) {
+                        Usuaris_vinculats_aux[posAs] = dataSnapshot.child(String.valueOf(posAs)).getValue().toString();
+                        multipleusuari = true;
 
                     }
-
+                    Usuaris_vinculats_aux[posAs] = nomUsuari;
                 }
+                Usuaris_vinculats = Arrays.copyOf(Usuaris_vinculats_aux, (int) dataSnapshot.getChildrenCount()+1);
             }
 
             @Override
@@ -102,6 +109,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("busnecessari", busnec[pos]);
         intent.putExtra("llistatancada", llistatancada[pos]);
         intent.putExtra("Usu_vinc", Usuaris_vinculats);
+        intent.putExtra("multUsu", multipleusuari);
         startActivity(intent);
     }
 
@@ -204,6 +212,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         NAct = getIntent().getExtras().getLong("cont");
         admin = getIntent().getExtras().getBoolean("admin");
         soci = getIntent().getExtras().getBoolean("soci");
+        nomUsuari = getIntent().getExtras().getString("nomUsuari");
     }
 
     public String ConvertirObjectToString(Object model) {

@@ -1,10 +1,12 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +39,8 @@ public class Event_activity extends AppCompatActivity {
     private Button btn_acompanyants;
     private boolean soci;
     private boolean llistatancada;
+    private String[] Usuaris_vinculats;
+    private boolean multipleusuari;
 
 
     @Override
@@ -46,6 +50,7 @@ public class Event_activity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Firebase.setAndroidContext(this);
         recogerExtras();
+
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
@@ -133,12 +138,24 @@ public class Event_activity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(multipleusuari){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Pick a color");
+            builder.setItems(Usuaris_vinculats, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // the user clicked on colors[which]
+                    descrip.setText(String.valueOf(which));
+                }
+            });
+            builder.show();
+        }
 
         fecha = dia+"/"+mes2+"/"+año;
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
         hora.setText(Hora);
-        descrip.setText(desc);
+        //descrip.setText(desc);
         apuntatBus=false;
         mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -165,6 +182,8 @@ public class Event_activity extends AppCompatActivity {
         soci = getIntent().getExtras().getBoolean("soci");
         busnecessari = getIntent().getExtras().getBoolean("busnecessari");
         llistatancada = getIntent().getExtras().getBoolean("llistatancada");
+        Usuaris_vinculats = getIntent().getExtras().getStringArray("Usu_vinc");
+        multipleusuari = getIntent().getExtras().getBoolean("multUsu");
     }
 
     public void num_acompanyants(android.view.View view){

@@ -37,6 +37,7 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -70,6 +71,7 @@ public class BasicActivity extends AppCompatActivity
     private DatabaseReference mRootIt;
     private String event;
     private boolean soci=false;
+    private String nomUsuari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,17 @@ public class BasicActivity extends AppCompatActivity
         Registre(id);
         Admin(id);
         Soci(id);
+        mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                nomUsuari=dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         //findViewById(R.id.goEditEvent_btn).setEnabled( false );
         super.onCreate(savedInstanceState);
 
@@ -256,6 +269,7 @@ public class BasicActivity extends AppCompatActivity
             intent.putExtra( "cont", cont );
             intent.putExtra("admin",admin);
             intent.putExtra("soci", soci);
+            intent.putExtra("nomUsuari", nomUsuari);
             startActivity(intent);
             //if fecha esta vacía, que ponga el current date
         }
