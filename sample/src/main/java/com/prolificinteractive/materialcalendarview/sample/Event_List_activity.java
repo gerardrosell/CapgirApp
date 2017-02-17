@@ -3,6 +3,7 @@ package com.prolificinteractive.materialcalendarview.sample;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Event_List_activity  extends AppCompatActivity  {
 
@@ -36,6 +40,9 @@ public class Event_List_activity  extends AppCompatActivity  {
     private String[] descripcions, hores;
     private boolean soci;
     private boolean llistatancada[];
+    private String id;
+    private DatabaseReference mRootRefUsu;
+    private String[] Usuaris_vinculats;
 
 
     @Override
@@ -46,7 +53,27 @@ public class Event_List_activity  extends AppCompatActivity  {
         Firebase.setAndroidContext(this);
         recogerExtras();
         participants = new String[1000];
+        Usuaris_vinculats = new String[1000];
+        mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
+        id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        mRootRefUsu.child(id).child("listUsu").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for(int posAs=0;  posAs<dataSnapshot.getChildrenCount() ;posAs++){
+                            Usuaris_vinculats[posAs]=dataSnapshot.child(String.valueOf(posAs)).getValue().toString();
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,6 +101,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("soci", soci);
         intent.putExtra("busnecessari", busnec[pos]);
         intent.putExtra("llistatancada", llistatancada[pos]);
+        intent.putExtra("Usu_vinc", Usuaris_vinculats);
         startActivity(intent);
     }
 
