@@ -41,6 +41,9 @@ public class Event_activity extends AppCompatActivity {
     private boolean llistatancada;
     private String[] Usuaris_vinculats;
     private boolean multipleusuari;
+    private TextView Assist_text;
+    private String nomUsuariSeleccionat;
+    private String id_write;
 
 
     @Override
@@ -74,6 +77,7 @@ public class Event_activity extends AppCompatActivity {
         No_assisteix = (CheckBox)findViewById(R.id.no);
         Va_en_bus = (CheckBox) findViewById(R.id.bus_si);
         btn_acompanyants = (Button) findViewById(R.id.btn_acompanyants);
+        Assist_text = (TextView) findViewById(R.id.Assist_text);
         btn_acompanyants.setVisibility(View.INVISIBLE);
         if(!busnecessari){
             TextView bus_text = (TextView) findViewById(R.id.bus_text);
@@ -92,52 +96,11 @@ public class Event_activity extends AppCompatActivity {
             Va_en_bus.setVisibility(View.INVISIBLE);
         }
 
-        mRootRef.child(String.valueOf(pos+1)).child("Assistents").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(id)){
-                    Si_assisteix.setChecked(true);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        mRootRef.child(String.valueOf(pos+1)).child("No_Assist").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(id)){
-                    No_assisteix.setChecked(true);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(id) && !llistatancada){
-                    Va_en_bus.setChecked(true);
-                    btn_acompanyants.setVisibility(View.VISIBLE);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
     }
     @Override
     protected void onStart() {
         super.onStart();
+        id_write = id;
         if(multipleusuari){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Pick a color");
@@ -145,9 +108,59 @@ public class Event_activity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // the user clicked on colors[which]
-                    descrip.setText(String.valueOf(which));
+                    if(Usuaris_vinculats[which].length()<=6){
+                        Assist_text.setText(Usuaris_vinculats[which]);
+                    } else{
+                        Assist_text.setText(Usuaris_vinculats[which].substring(0,5)+".");
+                    }
+                    nomUsuariSeleccionat = Usuaris_vinculats[which];
+                    id_write+=nomUsuariSeleccionat;
+                    //comprovació existència
+                    mRootRef.child(String.valueOf(pos+1)).child("Assistents").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(id_write)){
+                                Si_assisteix.setChecked(true);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    mRootRef.child(String.valueOf(pos+1)).child("No_Assist").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(id_write)){
+                                No_assisteix.setChecked(true);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(id_write) && !llistatancada){
+                                Va_en_bus.setChecked(true);
+                                btn_acompanyants.setVisibility(View.VISIBLE);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             });
+            builder.setCancelable(false);
             builder.show();
         }
 
@@ -155,7 +168,7 @@ public class Event_activity extends AppCompatActivity {
         data.setText(fecha);
         nom_event.setText(nombreEvento);//utilizamos el nombre leido en event_list_activity
         hora.setText(Hora);
-        //descrip.setText(desc);
+        descrip.setText(desc);
         apuntatBus=false;
         mRootRef.child(String.valueOf(pos+1)).child("Va En Bus").child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -244,19 +257,18 @@ public class Event_activity extends AppCompatActivity {
                 Si_ass = (Si_assisteix.isChecked() ? "True" : "False");
                 Bus = (Va_en_bus.isChecked() ? "True" : "False");
                 posi = String.valueOf(pos+1);
-
                 if(No_ass.equals( "True" )){
-                    mRootRef.child(posi).child("Assistents").child(id).removeValue();
-                    mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
-                    mRootRef.child(posi).child("No_Assist").child(id).setValue(nombre);
+                    mRootRef.child(posi).child("Assistents").child(id_write).removeValue();
+                    mRootRef.child(posi).child("Va En Bus").child(id_write).removeValue();
+                    mRootRef.child(posi).child("No_Assist").child(id_write).setValue(nomUsuariSeleccionat);
                 }else if (Si_ass.equals( "True" )){
-                    mRootRef.child(posi).child("Assistents").child(id).setValue(nombre);
-                    mRootRef.child(posi).child("No_Assist").child(id).removeValue();
+                    mRootRef.child(posi).child("Assistents").child(id_write).setValue(nomUsuariSeleccionat);
+                    mRootRef.child(posi).child("No_Assist").child(id_write).removeValue();
                     if (Bus.equals( "True" ) && !apuntatBus){
-                        mRootRef.child(posi).child("Va En Bus").child(id).setValue(nombre+" - 0");
+                        mRootRef.child(posi).child("Va En Bus").child(id_write).setValue(nomUsuariSeleccionat+" - 0");
                     }
                     else if(Bus.equals( "False" )){
-                        mRootRef.child(posi).child("Va En Bus").child(id).removeValue();
+                        mRootRef.child(posi).child("Va En Bus").child(id_write).removeValue();
                     }
                 }
             }

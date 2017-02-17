@@ -7,7 +7,6 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -199,7 +198,7 @@ public class Event_List_activity  extends AppCompatActivity  {
 
         @Override
         public void onClick(View view) {
-            Log.i("user", String.format("Clicked %d", getAdapterPosition()));
+            //Log.i("user", String.format("Clicked %d", getAdapterPosition()));
             activity.goEvent(getAdapterPosition());
         }
     }
