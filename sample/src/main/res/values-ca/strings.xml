@@ -30,6 +30,7 @@
     <string name="dades_inc">Dades incompletes</string>
     <string name="tanca_llista">Tanca Llista</string>
     <string name="obre_llista">Obre Llista</string>
+    <string name="escull_usuari">Escull quin usuari vols apuntar</string>
 
     <string-array name="custom_weekdays">
         <item>Su</item>

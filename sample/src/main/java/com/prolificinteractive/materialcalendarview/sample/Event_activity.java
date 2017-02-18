@@ -96,14 +96,10 @@ public class Event_activity extends AppCompatActivity {
             Va_en_bus.setVisibility(View.INVISIBLE);
         }
 
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
         id_write = id;
         if(multipleusuari){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Pick a color");
+            builder.setTitle(R.string.escull_usuari);
             builder.setItems(Usuaris_vinculats, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -163,6 +159,12 @@ public class Event_activity extends AppCompatActivity {
             builder.setCancelable(false);
             builder.show();
         }
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
 
         fecha = dia+"/"+mes2+"/"+año;
         data.setText(fecha);
