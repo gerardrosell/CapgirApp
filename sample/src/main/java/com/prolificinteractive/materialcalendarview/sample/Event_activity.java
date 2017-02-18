@@ -264,6 +264,9 @@ public class Event_activity extends AppCompatActivity {
                     mRootRef.child(posi).child("Assistents").child(id_write).removeValue();
                     mRootRef.child(posi).child("Va En Bus").child(id_write).removeValue();
                     mRootRef.child(posi).child("No_Assist").child(id_write).setValue(nomUsuariSeleccionat);
+                    if(nomUsuariSeleccionat.equals(nombre)){
+                        mRootRef.child(posi).child("Va En Bus").child(id_write+"Acompanyants").removeValue();
+                    }
                 }else if (Si_ass.equals( "True" )){
                     mRootRef.child(posi).child("Assistents").child(id_write).setValue(nomUsuariSeleccionat);
                     mRootRef.child(posi).child("No_Assist").child(id_write).removeValue();

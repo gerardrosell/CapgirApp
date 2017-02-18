@@ -25,6 +25,8 @@ public class Num_acompanyants extends AppCompatActivity {
     private EditText num_acomp;
     private String id;
     private String NmesA;
+    private DatabaseReference mRootRefAss;
+    private DatabaseReference mRootRefNoAss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class Num_acompanyants extends AppCompatActivity {
         setContentView(R.layout.activity_num_acompanyants);
         recogerExtras();
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes2).child(dia).child(String.valueOf(pos)).child("Va En Bus");
+        mRootRefAss=FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes2).child(dia).child(String.valueOf(pos)).child("Assistents");
+        mRootRefNoAss=FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes2).child(dia).child(String.valueOf(pos)).child("No_Assist");
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         showDate = (TextView) findViewById(R.id.showDate);
         guardar = (Button) findViewById(R.id.guardar);
@@ -71,6 +75,9 @@ public class Num_acompanyants extends AppCompatActivity {
                 } else{valor=num_acomp.getText().toString();}
                 if(!valor.equals("0")){
                     mRootRef.child(id+nombre+"Acompanyants").setValue("("+nombre+") - "+valor);
+                    mRootRef.child(id+nombre).setValue(nombre);
+                    mRootRefAss.child(id+nombre).setValue(nombre);
+                    mRootRefNoAss.child(id+nombre).removeValue();
                 } else{
                     mRootRef.child(id+nombre+"Acompanyants").removeValue();
                 }
