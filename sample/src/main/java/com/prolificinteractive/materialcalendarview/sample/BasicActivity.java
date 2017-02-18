@@ -2,6 +2,7 @@ package com.prolificinteractive.materialcalendarview.sample;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
@@ -20,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +37,6 @@ import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDeco
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -150,6 +149,13 @@ public class BasicActivity extends AppCompatActivity
         invalidateOptionsMenu();
     }
 
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+        Registre(id);
+        Admin(id);
+        Soci(id);
+    }*/
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
@@ -222,12 +228,10 @@ public class BasicActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            this.finishAffinity();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            finishAffinity();
         }
+        System.exit(0);
     }
 
     public void goEvent(View view) {
