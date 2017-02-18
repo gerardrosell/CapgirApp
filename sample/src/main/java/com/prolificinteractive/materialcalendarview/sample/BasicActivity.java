@@ -71,10 +71,14 @@ public class BasicActivity extends AppCompatActivity
     private DatabaseReference mRootIt;
     private String event;
     private boolean soci=false;
-    private String nomUsuari;
+    private boolean registrat = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_basic);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Firebase.setAndroidContext(this);
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento");
         mRootRefUsu = FirebaseDatabase.getInstance().getReference().child("Users");
         mRootRefAdmin = FirebaseDatabase.getInstance().getReference().child("Admin");
@@ -83,23 +87,8 @@ public class BasicActivity extends AppCompatActivity
         Registre(id);
         Admin(id);
         Soci(id);
-        mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                nomUsuari=dataSnapshot.getValue().toString();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         //findViewById(R.id.goEditEvent_btn).setEnabled( false );
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_basic);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        Firebase.setAndroidContext(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -160,6 +149,7 @@ public class BasicActivity extends AppCompatActivity
         textView.setText(getSelectedDatesString());
         invalidateOptionsMenu();
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
@@ -269,7 +259,6 @@ public class BasicActivity extends AppCompatActivity
             intent.putExtra( "cont", cont );
             intent.putExtra("admin",admin);
             intent.putExtra("soci", soci);
-            intent.putExtra("nomUsuari", nomUsuari);
             startActivity(intent);
             //if fecha esta vacía, que ponga el current date
         }

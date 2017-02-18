@@ -60,6 +60,17 @@ public class Event_List_activity  extends AppCompatActivity  {
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         mRootRef = FirebaseDatabase.getInstance().getReference().child("Evento").child(año).child(mes).child(dia);
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                nomUsuari = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mRootRefUsu.child(id).child("listUsu").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -109,6 +120,7 @@ public class Event_List_activity  extends AppCompatActivity  {
         intent.putExtra("llistatancada", llistatancada[pos]);
         intent.putExtra("Usu_vinc", Usuaris_vinculats);
         intent.putExtra("multUsu", multipleusuari);
+        intent.putExtra("nomUsuari", nomUsuari);
         startActivity(intent);
     }
 
@@ -211,7 +223,6 @@ public class Event_List_activity  extends AppCompatActivity  {
         NAct = getIntent().getExtras().getLong("cont");
         admin = getIntent().getExtras().getBoolean("admin");
         soci = getIntent().getExtras().getBoolean("soci");
-        nomUsuari = getIntent().getExtras().getString("nomUsuari");
     }
 
     public String ConvertirObjectToString(Object model) {

@@ -43,7 +43,7 @@ public class Num_acompanyants extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         showDate.setText(dia+"/"+mes+"/"+año);
-        mRootRef.child(id+nombre).addValueEventListener(new ValueEventListener() {
+        mRootRef.child(id+nombre+"Acompanyants").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -69,7 +69,11 @@ public class Num_acompanyants extends AppCompatActivity {
                 if(num_acomp.getText().toString()==null){
                     valor="0";
                 } else{valor=num_acomp.getText().toString();}
-                mRootRef.child(id+nombre).setValue(nombre+" - " +valor);
+                if(!valor.equals("0")){
+                    mRootRef.child(id+nombre+"Acompanyants").setValue("("+nombre+") - "+valor);
+                } else{
+                    mRootRef.child(id+nombre+"Acompanyants").removeValue();
+                }
                 Toast toast = Toast.makeText(Num_acompanyants.this, "Guardat", Toast.LENGTH_LONG);
                 toast.show();
                 onBackPressed();
