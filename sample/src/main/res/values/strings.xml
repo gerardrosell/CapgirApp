@@ -79,6 +79,7 @@
     <string name="tanca_llista">Tanca Llista</string>
     <string name="obre_llista">Obre Llista</string>
     <string name="escull_usuari">Escull quin usuari vols apuntar</string>
+    <string name="envia_recordatori">Envia recordatori</string>
 
 
 </resources>

@@ -22,6 +22,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Event_activity" />
+        <receiver android:name=".Button_listener">
+            <intent-filter>
+                <action android:name="button_click"/>
+            </intent-filter>
+        </receiver>
         <activity android:name=".Event_List_activity" />
         <activity android:name=".Edit_event_activity" />
         <activity

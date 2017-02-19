@@ -1,11 +1,14 @@
 package com.prolificinteractive.materialcalendarview.sample;
 
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +49,12 @@ public class Event_activity extends AppCompatActivity {
     private String nomUsuariSeleccionat;
     private String id_write;
 
+    private NotificationCompat.Builder builder;
+    private NotificationManager notificationManager;
+    private int notification_id;
+    private RemoteViews remoteViews;
+    private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +62,13 @@ public class Event_activity extends AppCompatActivity {
         setContentView(R.layout.activity_event_activity);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Firebase.setAndroidContext(this);
+        context = this;
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        builder = new NotificationCompat.Builder(this);
         recogerExtras();
-
+        remoteViews = new RemoteViews(getPackageName(),R.layout.custom_notification);
+        remoteViews.setImageViewResource(R.id.notif_icon,R.mipmap.ic_launcher);
+        remoteViews.setTextViewText(R.id.notif_title,nombreEvento+"  "+dia+"/"+mes2+"/"+año+"  "+Hora);
         mRootRefUsu= FirebaseDatabase.getInstance().getReference().child("Users");
         id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         /*mRootRefUsu.child(id).child("nombre").addValueEventListener(new ValueEventListener() {
@@ -364,6 +379,18 @@ public class Event_activity extends AppCompatActivity {
 
         if (id == R.id.obrellista_btn) {
             mRootRef.child(String.valueOf(pos+1)).child("llistatancada").setValue("false");
+            return true;
+        }
+
+        if (id == R.id.envia_notificacio) {
+            notification_id = (int) System.currentTimeMillis();
+
+            builder.setSmallIcon(R.mipmap.ic_launcher)
+                    .setAutoCancel(true)
+                    .setContentTitle("CAPGIRAPP")
+                    .setCustomBigContentView(remoteViews);
+
+            notificationManager.notify(notification_id,builder.build());
             return true;
         }
 

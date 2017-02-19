@@ -11,5 +11,7 @@
         android:id="@+id/tancallista_btn" />
     <item android:title="@string/obre_llista"
         android:id="@+id/obrellista_btn" />
+    <item android:title="@string/envia_recordatori"
+        android:id="@+id/envia_notificacio" />
 
 </menu>
